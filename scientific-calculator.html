@@ -2,589 +2,396 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="AIML Students Scientific Calculator - GSKit">
 <title>AIML Students Scientific Calculator | GSKit</title>
 
-<meta name="description"
-content="AIML Students Scientific Calculator - Free online scientific calculator for students.">
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
     font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#07111f,#101b2d,#07111f);
+    color:#fff;
     min-height:100vh;
-    background:linear-gradient(135deg,#e0f2fe,#eef2ff,#f8fafc);
-    color:#111827;
+    display:flex;
+    justify-content:center;
+    padding:18px 8px;
 }
 
-/* HEADER */
-header{
-    background:#111827;
-    color:white;
-    padding:18px 20px;
+.calculator{
+    width:100%;
+    max-width:650px;
+    background:#151a22;
+    border:1px solid #354052;
+    border-radius:22px;
+    padding:15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.55);
 }
 
 .header{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.logo{
-    font-size:25px;
-    font-weight:800;
-}
-
-.logo span{
-    color:#60a5fa;
-}
-
-.home{
-    text-decoration:none;
-    color:white;
-    background:#2563eb;
-    padding:11px 18px;
-    border-radius:9px;
-    font-weight:bold;
-}
-
-/* PAGE */
-.container{
-    width:95%;
-    max-width:1000px;
-    margin:28px auto 50px;
-}
-
-.heading{
     text-align:center;
-    margin-bottom:25px;
-}
-
-.heading h1{
-    font-size:32px;
-    margin-bottom:8px;
-}
-
-.heading p{
-    color:#64748b;
-    font-size:16px;
-}
-
-/* CALCULATOR */
-.calculator{
-    max-width:850px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    border-radius:22px;
-    box-shadow:0 15px 45px rgba(0,0,0,.15);
-}
-
-/* DISPLAY */
-.display-area{
-    background:#0f172a;
-    border-radius:16px;
-    padding:20px;
-    margin-bottom:18px;
-    min-height:150px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.expression{
-    min-height:28px;
-    color:#94a3b8;
-    text-align:right;
-    font-size:18px;
-    overflow-x:auto;
-    white-space:nowrap;
-}
-
-.display{
-    width:100%;
-    border:none;
-    outline:none;
-    background:transparent;
-    color:white;
-    text-align:right;
-    font-size:46px;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-/* MODE */
-.mode{
-    display:flex;
-    gap:10px;
-    margin-bottom:14px;
-    flex-wrap:wrap;
-}
-
-.mode button{
-    border:none;
-    padding:11px 20px;
-    border-radius:8px;
-    background:#e5e7eb;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.mode button.active{
-    background:#2563eb;
-    color:white;
-}
-
-/* MEMORY */
-.memory{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
     margin-bottom:12px;
 }
 
-.memory button{
-    height:48px;
-    border:0;
-    border-radius:9px;
-    background:#dbeafe;
-    color:#1e40af;
+.brand{
+    font-size:12px;
+    color:#63b3ff;
     font-weight:bold;
-    cursor:pointer;
+    letter-spacing:2px;
 }
 
-/* BUTTONS */
-.buttons{
+.title{
+    font-size:20px;
+    font-weight:800;
+    margin-top:4px;
+}
+
+.screen{
+    background:#a9bd99;
+    color:#102010;
+    min-height:125px;
+    border-radius:12px;
+    padding:10px 14px;
+    margin:10px 0 13px;
+    border:5px solid #242a32;
+    box-shadow:inset 0 0 15px rgba(0,0,0,.35);
+    overflow:hidden;
+}
+
+.status{
+    height:22px;
+    display:flex;
+    gap:13px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.expression{
+    height:38px;
+    font-size:20px;
+    text-align:right;
+    white-space:nowrap;
+    overflow-x:auto;
+}
+
+.answer{
+    height:42px;
+    font-size:31px;
+    font-weight:bold;
+    text-align:right;
+    white-space:nowrap;
+    overflow-x:auto;
+}
+
+.top-controls{
     display:grid;
     grid-template-columns:repeat(6,1fr);
-    gap:10px;
+    gap:6px;
+    margin-bottom:7px;
 }
 
-.calc-btn{
-    min-height:65px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:7px;
+}
+
+button{
+    min-height:47px;
     border:0;
-    border-radius:11px;
-    background:#f1f5f9;
-    color:#111827;
-    font-size:18px;
-    font-weight:bold;
+    border-radius:9px;
+    background:#303844;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
     cursor:pointer;
-    transition:.15s;
+    box-shadow:0 3px 0 #161b22;
+    transition:.08s;
+    user-select:none;
 }
 
-.calc-btn:hover{
-    background:#e2e8f0;
-    transform:translateY(-1px);
+button:active{
+    transform:translateY(3px);
+    box-shadow:none;
 }
 
-.calc-btn:active{
-    transform:scale(.96);
+.control{
+    min-height:39px;
+    font-size:11px;
+    background:#242b35;
 }
 
-.function{
-    background:#ede9fe;
-    color:#6d28d9;
-}
+.func{background:#394352}
+.number{background:#252c35;font-size:18px}
+.operator{background:#45556a;font-size:20px}
+.equal{background:#1677d2;font-size:22px}
+.danger{background:#9c3030}
+.special{background:#5b4730}
 
-.operator{
-    background:#dbeafe;
-    color:#1d4ed8;
-}
-
-.danger{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
-.equal{
-    background:#2563eb;
-    color:white;
-}
-
-.equal:hover{
-    background:#1d4ed8;
-}
-
-/* INFO */
-.info{
-    margin-top:22px;
-    padding:17px;
-    background:#f8fafc;
-    border-radius:12px;
-    line-height:1.7;
-    color:#475569;
-}
-
-/* FOOTER */
-footer{
+.footer{
     text-align:center;
-    padding:25px;
-    color:#64748b;
+    margin-top:13px;
+    color:#7e8998;
+    font-size:11px;
 }
 
-/* MOBILE */
-@media(max-width:700px){
+.popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:99;
+}
 
-    .container{
-        width:98%;
-        margin-top:18px;
-    }
+.popup.show{display:flex}
 
+.popup-box{
+    width:100%;
+    max-width:340px;
+    background:#1d232c;
+    border:1px solid #485364;
+    border-radius:16px;
+    padding:18px;
+}
+
+.popup-box h3{
+    margin-bottom:13px;
+}
+
+.popup-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+@media(max-width:450px){
     .calculator{
-        padding:12px;
+        padding:9px;
         border-radius:15px;
     }
 
-    .heading h1{
-        font-size:25px;
-    }
+    .title{font-size:16px}
+    .answer{font-size:26px}
+    .expression{font-size:17px}
 
-    .display-area{
-        min-height:125px;
-        padding:15px;
-    }
-
-    .display{
-        font-size:32px;
-    }
-
-    .buttons{
-        grid-template-columns:repeat(4,1fr);
-        gap:7px;
-    }
-
-    .calc-btn{
-        min-height:58px;
-        font-size:15px;
-    }
-
-    .memory{
-        grid-template-columns:repeat(5,1fr);
-        gap:6px;
-    }
-
-    .memory button{
-        padding:5px;
+    button{
+        min-height:43px;
         font-size:12px;
     }
 
-    .home{
-        padding:9px 12px;
-        font-size:13px;
-    }
+    .number{font-size:16px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="header">
+<div class="calculator">
 
-        <div class="logo">
-            GS<span>Kit</span>
-        </div>
+<div class="header">
+    <div class="brand">GSKIT • STUDENT TOOLS</div>
+    <div class="title">AIML Students Scientific Calculator</div>
+</div>
 
-        <a href="index.html" class="home">
-            🏠 Home
-        </a>
+<div class="screen">
 
-    </div>
-</header>
-
-
-<div class="container">
-
-    <div class="heading">
-        <h1>🧮 AIML Students Scientific Calculator</h1>
-        <p>Advanced Scientific Calculator for Students</p>
+    <div class="status">
+        <span id="angleDisplay">DEG</span>
+        <span id="shiftText">SHIFT OFF</span>
+        <span id="alphaText">ALPHA OFF</span>
+        <span id="memoryDisplay"></span>
     </div>
 
-
-    <div class="calculator">
-
-        <!-- DISPLAY -->
-        <div class="display-area">
-
-            <div id="expression" class="expression"></div>
-
-            <input
-                id="display"
-                class="display"
-                value="0"
-                readonly
-            >
-
-        </div>
-
-
-        <!-- ANGLE MODE -->
-        <div class="mode">
-
-            <button id="deg" class="active"
-                onclick="setMode('DEG')">
-                DEG
-            </button>
-
-            <button id="rad"
-                onclick="setMode('RAD')">
-                RAD
-            </button>
-
-            <button id="grad"
-                onclick="setMode('GRAD')">
-                GRAD
-            </button>
-
-        </div>
-
-
-        <!-- MEMORY -->
-        <div class="memory">
-
-            <button onclick="memoryClear()">MC</button>
-            <button onclick="memoryRecall()">MR</button>
-            <button onclick="memoryAdd()">M+</button>
-            <button onclick="memorySubtract()">M-</button>
-            <button onclick="memoryStore()">MS</button>
-
-        </div>
-
-
-        <!-- BUTTONS -->
-        <div class="buttons">
-
-            <button class="calc-btn danger"
-                onclick="clearAll()">AC</button>
-
-            <button class="calc-btn"
-                onclick="backspace()">⌫</button>
-
-            <button class="calc-btn"
-                onclick="append('(')">(</button>
-
-            <button class="calc-btn"
-                onclick="append(')')">)</button>
-
-            <button class="calc-btn function"
-                onclick="append('π')">π</button>
-
-            <button class="calc-btn function"
-                onclick="append('e')">e</button>
-
-
-            <button class="calc-btn function"
-                onclick="func('sin')">sin</button>
-
-            <button class="calc-btn function"
-                onclick="func('cos')">cos</button>
-
-            <button class="calc-btn function"
-                onclick="func('tan')">tan</button>
-
-            <button class="calc-btn function"
-                onclick="func('asin')">sin⁻¹</button>
-
-            <button class="calc-btn function"
-                onclick="func('acos')">cos⁻¹</button>
-
-            <button class="calc-btn function"
-                onclick="func('atan')">tan⁻¹</button>
-
-
-            <button class="calc-btn function"
-                onclick="func('log')">log</button>
-
-            <button class="calc-btn function"
-                onclick="func('ln')">ln</button>
-
-            <button class="calc-btn function"
-                onclick="func('sqrt')">√</button>
-
-            <button class="calc-btn function"
-                onclick="square()">x²</button>
-
-            <button class="calc-btn function"
-                onclick="append('^')">xʸ</button>
-
-            <button class="calc-btn function"
-                onclick="factorial()">x!</button>
-
-
-            <button class="calc-btn"
-                onclick="append('7')">7</button>
-
-            <button class="calc-btn"
-                onclick="append('8')">8</button>
-
-            <button class="calc-btn"
-                onclick="append('9')">9</button>
-
-            <button class="calc-btn operator"
-                onclick="append('/')">÷</button>
-
-            <button class="calc-btn function"
-                onclick="percent()">%</button>
-
-            <button class="calc-btn function"
-                onclick="ans()">Ans</button>
-
-
-            <button class="calc-btn"
-                onclick="append('4')">4</button>
-
-            <button class="calc-btn"
-                onclick="append('5')">5</button>
-
-            <button class="calc-btn"
-                onclick="append('6')">6</button>
-
-            <button class="calc-btn operator"
-                onclick="append('*')">×</button>
-
-            <button class="calc-btn function"
-                onclick="toggleSign()">±</button>
-
-            <button class="calc-btn function"
-                onclick="inverse()">1/x</button>
-
-
-            <button class="calc-btn"
-                onclick="append('1')">1</button>
-
-            <button class="calc-btn"
-                onclick="append('2')">2</button>
-
-            <button class="calc-btn"
-                onclick="append('3')">3</button>
-
-            <button class="calc-btn operator"
-                onclick="append('-')">−</button>
-
-            <button class="calc-btn function"
-                onclick="cube()">x³</button>
-
-            <button class="calc-btn function"
-                onclick="append('10^')">10ˣ</button>
-
-
-            <button class="calc-btn"
-                onclick="append('0')">0</button>
-
-            <button class="calc-btn"
-                onclick="append('.')">.</button>
-
-            <button class="calc-btn operator"
-                onclick="append('+')">+</button>
-
-            <button class="calc-btn function"
-                onclick="randomNumber()">Rand</button>
-
-            <button class="calc-btn function"
-                onclick="copyAnswer()">Copy</button>
-
-            <button class="calc-btn equal"
-                onclick="calculate()">=</button>
-
-        </div>
-
-
-        <div class="info">
-            <b>AIML Students Scientific Calculator</b><br>
-            Supports basic arithmetic, trigonometry, inverse trigonometry,
-            logarithms, powers, roots, factorial, percentage, memory,
-            DEG/RAD/GRAD modes and keyboard input.
-        </div>
-
-    </div>
+    <div id="expression" class="expression"></div>
+    <div id="answer" class="answer">0</div>
+
+</div>
+
+<div class="top-controls">
+
+<button class="control" onclick="toggleShift()">SHIFT</button>
+<button class="control" onclick="toggleAlpha()">ALPHA</button>
+<button class="control" onclick="showAngle()">DRG</button>
+<button class="control" onclick="showMenu()">MENU</button>
+<button class="control" onclick="showSetup()">SETUP</button>
+<button class="control" onclick="powerOn()">ON</button>
+
+</div>
+
+<div class="grid">
+
+<button class="func" onclick="memoryClear()">MC</button>
+<button class="func" onclick="memoryRecall()">MR</button>
+<button class="func" onclick="memoryPlus()">M+</button>
+<button class="func" onclick="memoryMinus()">M−</button>
+<button class="func" onclick="memoryStore()">MS</button>
+<button class="danger" onclick="allClear()">AC</button>
+
+<button class="func" onclick="sinFunction()">sin</button>
+<button class="func" onclick="cosFunction()">cos</button>
+<button class="func" onclick="tanFunction()">tan</button>
+<button class="func" onclick="inverseTrig()">sin⁻¹</button>
+<button class="func" onclick="inverseCos()">cos⁻¹</button>
+<button class="func" onclick="inverseTan()">tan⁻¹</button>
+
+<button class="func" onclick="logFunction()">log</button>
+<button class="func" onclick="lnFunction()">ln</button>
+<button class="func" onclick="sqrtFunction()">√</button>
+<button class="func" onclick="square()">x²</button>
+<button class="func" onclick="cube()">x³</button>
+<button class="func" onclick="powerFunction()">xʸ</button>
+
+<button class="func" onclick="factorial()">x!</button>
+<button class="func" onclick="reciprocal()">1/x</button>
+<button class="func" onclick="percentFunction()">%</button>
+<button class="func" onclick="insert('π')">π</button>
+<button class="func" onclick="insert('e')">e</button>
+<button class="func" onclick="randomFunction()">Ran#</button>
+
+<button class="special" onclick="insert('(')">(</button>
+<button class="special" onclick="insert(')')">)</button>
+<button class="special" onclick="insert('Ans')">Ans</button>
+<button class="special" onclick="nCr()">nCr</button>
+<button class="special" onclick="fraction()">a/b</button>
+<button class="special" onclick="scientificNotation()">×10ˣ</button>
+
+<button class="number" onclick="insert('7')">7</button>
+<button class="number" onclick="insert('8')">8</button>
+<button class="number" onclick="insert('9')">9</button>
+<button class="operator" onclick="insert('÷')">÷</button>
+<button class="operator" onclick="insert('^')">^</button>
+<button class="danger" onclick="deleteLast()">DEL</button>
+
+<button class="number" onclick="insert('4')">4</button>
+<button class="number" onclick="insert('5')">5</button>
+<button class="number" onclick="insert('6')">6</button>
+<button class="operator" onclick="insert('×')">×</button>
+<button class="operator" onclick="insert('%')">%</button>
+<button class="operator" onclick="negative()">±</button>
+
+<button class="number" onclick="insert('1')">1</button>
+<button class="number" onclick="insert('2')">2</button>
+<button class="number" onclick="insert('3')">3</button>
+<button class="operator" onclick="insert('+')">+</button>
+<button class="operator" onclick="insert('−')">−</button>
+<button class="equal" onclick="calculate()">=</button>
+
+<button class="number" onclick="insert('0')">0</button>
+<button class="number" onclick="insert('.')">.</button>
+<button class="func" onclick="absoluteFunction()">|x|</button>
+<button class="func" onclick="expFunction()">EXP</button>
+<button class="func" onclick="showHistory()">HIST</button>
+<button class="func" onclick="insert('e')">EXP</button>
+
+</div>
+
+<div class="footer">
+    GSKit • AIML Students Scientific Calculator
+</div>
 
 </div>
 
 
-<footer>
-    © 2026 GSKit | AIML Students Scientific Calculator
-</footer>
+<!-- POPUP -->
+
+<div id="popup" class="popup">
+<div class="popup-box">
+
+<h3 id="popupTitle">MENU</h3>
+
+<div class="popup-grid">
+
+<button onclick="setAngle('DEG')">DEG</button>
+<button onclick="setAngle('RAD')">RAD</button>
+<button onclick="setAngle('GRAD')">GRAD</button>
+
+<button onclick="matrixMode()">MATRIX</button>
+<button onclick="vectorMode()">VECTOR</button>
+<button onclick="statMode()">STAT</button>
+
+<button onclick="complexMode()">CMPLX</button>
+<button onclick="baseMode()">BASE</button>
+<button onclick="constantMenu()">CONST</button>
+
+</div>
+
+<br>
+
+<button style="width:100%" onclick="closePopup()">CLOSE</button>
+
+</div>
+</div>
 
 
 <script>
 
+/* =========================================
+   GSKit SCIENTIFIC CALCULATOR ENGINE
+========================================= */
+
 let expression = "";
-let lastAnswer = 0;
+let answer = 0;
 let memory = 0;
-let mode = "DEG";
+let storedValue = 0;
 
-const display = document.getElementById("display");
-const expressionBox = document.getElementById("expression");
+let angleMode = "DEG";
+let shift = false;
+let alpha = false;
+
+let history = [];
+let historyPosition = -1;
 
 
-/* DISPLAY */
+/* SCREEN */
 
 function update(){
 
-    display.value = expression || "0";
+    document.getElementById("expression").textContent =
+        expression;
 
+    document.getElementById("answer").textContent =
+        format(answer);
+
+    document.getElementById("angleDisplay").textContent =
+        angleMode;
+
+    document.getElementById("shiftText").textContent =
+        "SHIFT " + (shift ? "ON" : "OFF");
+
+    document.getElementById("alphaText").textContent =
+        "ALPHA " + (alpha ? "ON" : "OFF");
+
+    document.getElementById("memoryDisplay").textContent =
+        memory !== 0 ? "M" : "";
 }
 
 
-/* APPEND */
+/* INSERT */
 
-function append(value){
-
-    if(expression === "Error"){
-        expression = "";
-    }
-
+function insert(value){
     expression += value;
-
     update();
-
 }
 
 
 /* CLEAR */
 
-function clearAll(){
-
+function allClear(){
     expression = "";
-    expressionBox.textContent = "";
-    display.value = "0";
-
+    answer = 0;
+    update();
 }
 
 
-/* BACKSPACE */
-
-function backspace(){
-
-    expression = expression.slice(0,-1);
+function deleteLast(){
+    expression =
+        expression.substring(0, expression.length - 1);
 
     update();
-
-}
-
-
-/* ANGLE MODE */
-
-function setMode(value){
-
-    mode = value;
-
-    document.getElementById("deg").classList.remove("active");
-    document.getElementById("rad").classList.remove("active");
-    document.getElementById("grad").classList.remove("active");
-
-    document.getElementById(value.toLowerCase())
-        .classList.add("active");
-
 }
 
 
@@ -592,369 +399,110 @@ function setMode(value){
 
 function toRad(x){
 
-    if(mode === "DEG"){
+    if(angleMode === "DEG")
         return x * Math.PI / 180;
-    }
 
-    if(mode === "GRAD"){
+    if(angleMode === "GRAD")
         return x * Math.PI / 200;
-    }
 
     return x;
-
 }
 
 
 function fromRad(x){
 
-    if(mode === "DEG"){
+    if(angleMode === "DEG")
         return x * 180 / Math.PI;
-    }
 
-    if(mode === "GRAD"){
+    if(angleMode === "GRAD")
         return x * 200 / Math.PI;
-    }
 
     return x;
-
 }
 
 
-/* FUNCTIONS */
+/* =========================================
+   SAFE EXPRESSION CALCULATOR
+========================================= */
 
-function func(name){
+function calculateExpression(text){
 
-    try{
+    let s = text;
 
-        let value = evaluate();
+    s = s.replace(/×/g,"*");
+    s = s.replace(/÷/g,"/");
+    s = s.replace(/−/g,"-");
 
-        let result;
+    s = s.replace(/π/g,"PI");
+    s = s.replace(/\bAns\b/g,"ANS");
 
-        switch(name){
+    s = s.replace(/\^/g,"**");
 
-            case "sin":
-                result = Math.sin(toRad(value));
-                break;
+    s = s.replace(/(\d+(?:\.\d+)?)%/g,"($1/100)");
 
-            case "cos":
-                result = Math.cos(toRad(value));
-                break;
+    s = s.replace(/sin\(/g,"SIN(");
+    s = s.replace(/cos\(/g,"COS(");
+    s = s.replace(/tan\(/g,"TAN(");
 
-            case "tan":
-                result = Math.tan(toRad(value));
-                break;
+    s = s.replace(/log\(/g,"LOG(");
+    s = s.replace(/ln\(/g,"LN(");
 
-            case "asin":
-                result = fromRad(Math.asin(value));
-                break;
-
-            case "acos":
-                result = fromRad(Math.acos(value));
-                break;
-
-            case "atan":
-                result = fromRad(Math.atan(value));
-                break;
-
-            case "log":
-                result = Math.log10(value);
-                break;
-
-            case "ln":
-                result = Math.log(value);
-                break;
-
-            case "sqrt":
-                result = Math.sqrt(value);
-                break;
-
-            default:
-                throw new Error();
-
-        }
-
-        showResult(result);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* SQUARE */
-
-function square(){
-
-    try{
-
-        let value = evaluate();
-
-        showResult(value * value);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* CUBE */
-
-function cube(){
-
-    try{
-
-        let value = evaluate();
-
-        showResult(value * value * value);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* INVERSE */
-
-function inverse(){
-
-    try{
-
-        let value = evaluate();
-
-        showResult(1/value);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* FACTORIAL */
-
-function factorial(){
-
-    try{
-
-        let n = evaluate();
-
-        if(n < 0 || !Number.isInteger(n)){
-            throw new Error();
-        }
-
-        let result = 1;
-
-        for(let i=2;i<=n;i++){
-            result *= i;
-        }
-
-        showResult(result);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* PERCENT */
-
-function percent(){
-
-    try{
-
-        let value = evaluate();
-
-        showResult(value/100);
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* SIGN */
-
-function toggleSign(){
-
-    try{
-
-        showResult(-evaluate());
-
-    }catch{
-
-        error();
-
-    }
-
-}
-
-
-/* RANDOM */
-
-function randomNumber(){
-
-    showResult(Math.random());
-
-}
-
-
-/* ANSWER */
-
-function ans(){
-
-    append(String(lastAnswer));
-
-}
-
-
-/* MEMORY */
-
-function memoryClear(){
-
-    memory = 0;
-
-}
-
-function memoryRecall(){
-
-    append(String(memory));
-
-}
-
-function memoryAdd(){
-
-    try{
-        memory += evaluate();
-    }catch{
-        error();
-    }
-
-}
-
-function memorySubtract(){
-
-    try{
-        memory -= evaluate();
-    }catch{
-        error();
-    }
-
-}
-
-function memoryStore(){
-
-    try{
-        memory = evaluate();
-    }catch{
-        error();
-    }
-
-}
-
-
-/* COPY */
-
-function copyAnswer(){
-
-    navigator.clipboard.writeText(display.value)
-    .then(()=>{
-        alert("Answer copied!");
-    })
-    .catch(()=>{
-        alert("Copy failed");
-    });
-
-}
-
-
-/* SHOW RESULT */
-
-function showResult(result){
-
-    if(!Number.isFinite(result)){
-        throw new Error();
-    }
-
-    lastAnswer = result;
-
-    expressionBox.textContent =
-        expression + " =";
-
-    expression = format(result);
-
-    update();
-
-}
-
-
-/* FORMAT */
-
-function format(number){
-
-    if(Math.abs(number) < 1e-12){
-        return "0";
-    }
-
-    return Number(
-        number.toPrecision(12)
-    ).toString();
-
-}
-
-
-/* EVALUATE */
-
-function evaluate(){
-
-    if(!expression){
-        return 0;
-    }
-
-    let exp = expression;
-
-    exp = exp.replace(/π/g,"Math.PI");
-
-    exp = exp.replace(/\be\b/g,"Math.E");
-
-    exp = exp.replace(/\^/g,"**");
-
-    exp = exp.replace(/10\*\*/g,"10**");
+    s = s.replace(/sqrt\(/g,"SQRT(");
+    s = s.replace(/abs\(/g,"ABS(");
+    s = s.replace(/exp\(/g,"EXP(");
 
     /*
-       Only mathematical characters/functions
+      e constant only when used alone.
+      Example: 2×e
     */
+    s = s.replace(/\be\b/g,"E");
 
-    if(!/^[0-9+\-*/().\sA-Za-z_]+$/.test(exp)){
-        throw new Error();
+    try{
+
+        /*
+          Allow only calculator characters.
+        */
+
+        if(!/^[0-9+\-*/().,%A-Z_ ]+$/.test(s)){
+            throw new Error("Invalid");
+        }
+
+        let result = Function(
+            "PI","E","ANS",
+            "SIN","COS","TAN",
+            "ASIN","ACOS","ATAN",
+            "LOG","LN","SQRT",
+            "ABS","EXP",
+            '"use strict"; return (' + s + ')'
+        )(
+            Math.PI,
+            Math.E,
+            answer,
+
+            x => Math.sin(toRad(x)),
+            x => Math.cos(toRad(x)),
+            x => Math.tan(toRad(x)),
+
+            x => fromRad(Math.asin(x)),
+            x => fromRad(Math.acos(x)),
+            x => fromRad(Math.atan(x)),
+
+            x => Math.log10(x),
+            x => Math.log(x),
+            x => Math.sqrt(x),
+            x => Math.abs(x),
+            x => Math.exp(x)
+        );
+
+        if(!Number.isFinite(result))
+            throw new Error("Math Error");
+
+        return result;
+
+    }catch(e){
+
+        throw new Error("Invalid Calculation");
     }
-
-    const result = Function(
-        '"use strict"; return (' + exp + ')'
-    )();
-
-    if(!Number.isFinite(result)){
-        throw new Error();
-    }
-
-    return result;
-
 }
 
 
@@ -962,86 +510,660 @@ function evaluate(){
 
 function calculate(){
 
+    if(!expression.trim())
+        return;
+
     try{
 
-        const old = expression;
+        let old = expression;
 
-        const result = evaluate();
+        let result =
+            calculateExpression(expression);
 
-        lastAnswer = result;
+        history.push(old);
 
-        expressionBox.textContent =
-            old + " =";
+        historyPosition = history.length;
 
-        expression = format(result);
+        answer = result;
+        expression = "";
 
         update();
 
-    }catch{
+    }catch(e){
 
-        error();
+        showError();
+    }
+}
 
+
+/* CURRENT VALUE */
+
+function currentValue(){
+
+    if(expression.trim()){
+
+        try{
+            return calculateExpression(expression);
+        }catch(e){
+            showError();
+            return null;
+        }
     }
 
+    return answer;
+}
+
+
+/* POWER */
+
+function square(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = x*x;
+    expression = "";
+
+    update();
+}
+
+
+function cube(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = x*x*x;
+    expression = "";
+
+    update();
+}
+
+
+function powerFunction(){
+
+    if(expression.trim()){
+        insert("^");
+        return;
+    }
+
+    let x = answer;
+
+    let p = Number(prompt("Power"));
+
+    if(!Number.isFinite(p)) return;
+
+    answer = Math.pow(x,p);
+    update();
+}
+
+
+/* ROOT */
+
+function sqrtFunction(){
+
+    let x = currentValue();
+
+    if(x === null || x < 0){
+        showError();
+        return;
+    }
+
+    answer = Math.sqrt(x);
+    expression = "";
+
+    update();
+}
+
+
+/* LOG */
+
+function logFunction(){
+
+    let x = currentValue();
+
+    if(x === null || x <= 0){
+        showError();
+        return;
+    }
+
+    answer = Math.log10(x);
+    expression = "";
+
+    update();
+}
+
+
+function lnFunction(){
+
+    let x = currentValue();
+
+    if(x === null || x <= 0){
+        showError();
+        return;
+    }
+
+    answer = Math.log(x);
+    expression = "";
+
+    update();
+}
+
+
+function expFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = Math.exp(x);
+    expression = "";
+
+    update();
+}
+
+
+/* TRIG */
+
+function sinFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = Math.sin(toRad(x));
+    expression = "";
+
+    update();
+}
+
+
+function cosFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = Math.cos(toRad(x));
+    expression = "";
+
+    update();
+}
+
+
+function tanFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = Math.tan(toRad(x));
+    expression = "";
+
+    update();
+}
+
+
+/* INVERSE TRIG */
+
+function inverseTrig(){
+
+    let x = currentValue();
+
+    if(x === null || x < -1 || x > 1){
+        showError();
+        return;
+    }
+
+    answer = fromRad(Math.asin(x));
+    expression = "";
+
+    update();
+}
+
+
+function inverseCos(){
+
+    let x = currentValue();
+
+    if(x === null || x < -1 || x > 1){
+        showError();
+        return;
+    }
+
+    answer = fromRad(Math.acos(x));
+    expression = "";
+
+    update();
+}
+
+
+function inverseTan(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = fromRad(Math.atan(x));
+    expression = "";
+
+    update();
+}
+
+
+/* NEGATIVE */
+
+function negative(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = -x;
+    expression = "";
+
+    update();
+}
+
+
+/* FACTORIAL */
+
+function factorial(){
+
+    let x = currentValue();
+
+    if(
+        x === null ||
+        x < 0 ||
+        !Number.isInteger(x) ||
+        x > 170
+    ){
+        showError();
+        return;
+    }
+
+    let result = 1;
+
+    for(let i=2;i<=x;i++)
+        result *= i;
+
+    answer = result;
+    expression = "";
+
+    update();
+}
+
+
+/* nCr */
+
+function nCr(){
+
+    let n = Number(prompt("Enter n"));
+    let r = Number(prompt("Enter r"));
+
+    if(
+        !Number.isInteger(n) ||
+        !Number.isInteger(r) ||
+        n < 0 ||
+        r < 0 ||
+        r > n
+    ){
+        showError();
+        return;
+    }
+
+    answer =
+        factorialNumber(n) /
+        (
+            factorialNumber(r) *
+            factorialNumber(n-r)
+        );
+
+    expression = "";
+
+    update();
+}
+
+
+function factorialNumber(n){
+
+    let result = 1;
+
+    for(let i=2;i<=n;i++)
+        result *= i;
+
+    return result;
+}
+
+
+/* RECIPROCAL */
+
+function reciprocal(){
+
+    let x = currentValue();
+
+    if(x === null || x === 0){
+        showError();
+        return;
+    }
+
+    answer = 1/x;
+    expression = "";
+
+    update();
+}
+
+
+function fraction(){
+    reciprocal();
+}
+
+
+/* PERCENT */
+
+function percentFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = x/100;
+    expression = "";
+
+    update();
+}
+
+
+/* MEMORY */
+
+function memoryClear(){
+    memory = 0;
+    update();
+}
+
+
+function memoryRecall(){
+
+    expression += String(memory);
+    update();
+}
+
+
+function memoryPlus(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    memory += x;
+    expression = "";
+
+    update();
+}
+
+
+function memoryMinus(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    memory -= x;
+    expression = "";
+
+    update();
+}
+
+
+function memoryStore(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    memory = x;
+    update();
+}
+
+
+/* ABS */
+
+function absoluteFunction(){
+
+    let x = currentValue();
+
+    if(x === null) return;
+
+    answer = Math.abs(x);
+    expression = "";
+
+    update();
+}
+
+
+/* RANDOM */
+
+function randomFunction(){
+
+    answer = Math.random();
+    expression = "";
+
+    update();
+}
+
+
+/* SCIENTIFIC NOTATION */
+
+function scientificNotation(){
+
+    insert("×10^");
+}
+
+
+/* SHIFT */
+
+function toggleShift(){
+
+    shift = !shift;
+    update();
+}
+
+
+function toggleAlpha(){
+
+    alpha = !alpha;
+    update();
+}
+
+
+/* POWER ON */
+
+function powerOn(){
+
+    expression = "";
+    answer = 0;
+
+    update();
+}
+
+
+/* ANGLE */
+
+function showAngle(){
+
+    showPopup("ANGLE MODE");
+
+}
+
+
+function setAngle(mode){
+
+    angleMode = mode;
+
+    closePopup();
+    update();
+}
+
+
+/* HISTORY */
+
+function showHistory(){
+
+    if(history.length === 0){
+        alert("No calculation history.");
+        return;
+    }
+
+    alert(
+        history.slice(-10).join("\n")
+    );
+}
+
+
+/* MENU */
+
+function showMenu(){
+    showPopup("MENU");
+}
+
+
+function showSetup(){
+    showPopup("SETUP");
+}
+
+
+function showPopup(title){
+
+    document.getElementById("popupTitle").textContent =
+        title;
+
+    document.getElementById("popup").classList.add("show");
+}
+
+
+function closePopup(){
+
+    document.getElementById("popup").classList.remove("show");
+}
+
+
+/* MODES */
+
+function matrixMode(){
+    alert("MATRIX mode selected.");
+}
+
+function vectorMode(){
+    alert("VECTOR mode selected.");
+}
+
+function statMode(){
+    alert("STAT mode selected.");
+}
+
+function complexMode(){
+    alert("CMPLX mode selected.");
+}
+
+function baseMode(){
+    alert("BASE mode selected.");
+}
+
+function constantMenu(){
+
+    alert(
+        "π = " + Math.PI +
+        "\ne = " + Math.E
+    );
 }
 
 
 /* ERROR */
 
-function error(){
+function showError(){
 
-    expression = "Error";
+    document.getElementById("answer").textContent =
+        "Math ERROR";
 
-    display.value = "Error";
+    setTimeout(update,1200);
+}
 
+
+/* FORMAT */
+
+function format(x){
+
+    if(
+        x === undefined ||
+        x === null ||
+        Number.isNaN(x)
+    )
+        return "0";
+
+    if(
+        Math.abs(x) >= 10000000000 ||
+        (
+            Math.abs(x) > 0 &&
+            Math.abs(x) < 0.00000001
+        )
+    ){
+        return Number(x).toExponential(8);
+    }
+
+    return Number(x.toFixed(10)).toString();
 }
 
 
 /* KEYBOARD */
 
-document.addEventListener("keydown",function(e){
+document.addEventListener("keydown",function(event){
 
-    const key = e.key;
+    let key = event.key;
 
     if(
         (key >= "0" && key <= "9") ||
+        key === "." ||
         key === "+" ||
         key === "-" ||
         key === "*" ||
         key === "/" ||
-        key === "." ||
         key === "(" ||
-        key === ")" ||
-        key === "^"
+        key === ")"
     ){
 
-        append(key);
+        insert(
+            key === "*" ? "×" :
+            key === "/" ? "÷" :
+            key
+        );
 
     }
+    else if(key === "Enter"){
 
-    else if(key === "Enter" || key === "="){
-
-        e.preventDefault();
-
+        event.preventDefault();
         calculate();
 
     }
-
     else if(key === "Backspace"){
 
-        backspace();
+        deleteLast();
 
     }
-
     else if(key === "Escape"){
 
-        clearAll();
+        allClear();
 
     }
-
 });
+
+
+/* START */
+
+update();
 
 </script>
 
 </body>
-      </html>
+    </html>
