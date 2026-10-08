@@ -1,637 +1,1728 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scientific Calculator | GSKit</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GSKit | Scientific Calculator</title>
 
 <meta name="description"
-content="GSKit advanced scientific calculator with trigonometry, logarithms, powers, roots, factorial, percentage and more.">
+      content="Free online scientific calculator by GSKit.">
 
 <style>
+
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    margin:0;
-    background:#e9edf2;
-    font-family:Arial,sans-serif;
-    color:#18212b;
+
+    background:
+    linear-gradient(135deg,#eef2ff,#f8fafc);
+
+    min-height:100vh;
+
+    color:#1e293b;
 }
 
-header{
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+
+    width:100%;
+
     background:white;
+
     padding:15px 6%;
+
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.12);
+
+    justify-content:space-between;
+
+    box-shadow:
+    0 2px 15px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
 }
 
 .logo{
+
     font-size:28px;
+
     font-weight:800;
-    color:#1769d1;
+
+    color:#2563eb;
+
     text-decoration:none;
 }
 
-.home{
-    color:#1769d1;
+.logo span{
+    color:#111827;
+}
+
+.back-btn{
+
     text-decoration:none;
+
+    color:#2563eb;
+
+    border:1px solid #2563eb;
+
+    padding:9px 16px;
+
+    border-radius:8px;
+
     font-weight:bold;
+
+    transition:.2s;
 }
 
-main{
-    max-width:520px;
-    margin:25px auto;
-    padding:0 12px;
+.back-btn:hover{
+
+    background:#2563eb;
+
+    color:white;
 }
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+
+    padding:45px 20px 70px;
+
+    text-align:center;
+}
+
+.page h1{
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+    color:#111827;
+}
+
+.page-subtitle{
+
+    color:#64748b;
+
+    margin-bottom:30px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   CALCULATOR BODY
+========================= */
 
 .calculator{
-    background:linear-gradient(#30363d,#20252b);
-    border-radius:24px;
+
+    width:100%;
+
+    max-width:480px;
+
+    margin:auto;
+
+    background:
+    linear-gradient(
+        145deg,
+        #111827,
+        #020617
+    );
+
+    border-radius:25px;
+
     padding:18px;
-    box-shadow:0 15px 35px rgba(0,0,0,.3);
+
+    box-shadow:
+
+    0 25px 60px
+    rgba(0,0,0,.28),
+
+    inset 0 1px 1px
+    rgba(255,255,255,.15);
+
+    border:2px solid #334155;
 }
 
-.brand{
+
+/* =========================
+   TOP
+========================= */
+
+.calc-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:5px 8px 12px;
+
     color:white;
-    font-size:20px;
+}
+
+.model{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+
+    color:#cbd5e1;
+}
+
+.mode{
+
+    font-size:11px;
+
+    color:#84cc16;
+
     font-weight:bold;
 }
 
-.subtitle{
-    color:#b8c0c8;
-    font-size:11px;
-    margin:4px 0 12px;
-}
 
-.screen{
-    background:#dce8c9;
-    border:8px solid #171a1d;
+/* =========================
+   DISPLAY
+========================= */
+
+.display-container{
+
+    background:#dff0d0;
+
     border-radius:8px;
-    padding:8px 12px;
-    min-height:95px;
-    color:#111;
-}
 
-.status{
-    display:flex;
-    justify-content:space-between;
-    font-size:11px;
-    height:18px;
+    padding:10px;
+
+    margin-bottom:12px;
+
+    border:
+
+    5px solid #334155;
+
+    box-shadow:
+
+    inset 0 3px 8px
+    rgba(0,0,0,.35);
 }
 
 .expression{
-    height:40px;
-    text-align:right;
-    font-family:monospace;
-    font-size:23px;
+
+    width:100%;
+
+    height:35px;
+
     overflow:hidden;
+
     white-space:nowrap;
-    padding-top:7px;
+
+    text-align:right;
+
+    color:#334155;
+
+    font-size:17px;
 }
 
-.answer{
+.display{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
     text-align:right;
-    font-family:monospace;
-    font-size:23px;
+
+    font-size:29px;
+
     font-weight:bold;
-    overflow:hidden;
-    white-space:nowrap;
+
+    color:#111827;
 }
 
-.keys{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
+
+/* =========================
+   DEG / RAD
+========================= */
+
+.angle-row{
+
+    display:flex;
+
     gap:7px;
-    margin-top:14px;
+
+    margin-bottom:9px;
 }
 
-button{
-    border:0;
-    border-radius:7px;
-    min-height:45px;
-    background:#4f5963;
-    color:white;
-    font-size:15px;
+.angle-btn{
+
+    flex:1;
+
+    padding:8px;
+
+    border:none;
+
+    border-radius:6px;
+
+    background:#334155;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+
     font-weight:bold;
+
     cursor:pointer;
-    box-shadow:0 2px 0 #15191d;
 }
 
-button:active{
-    transform:translateY(1px);
-    box-shadow:none;
+.angle-btn.active{
+
+    background:#84cc16;
+
+    color:#111827;
 }
+
+
+/* =========================
+   BUTTON GRID
+========================= */
+
+.buttons{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:7px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.calc-btn{
+
+    height:48px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #475569,
+        #1e293b
+    );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+
+    0 3px 0 #0f172a,
+
+    inset 0 1px 1px
+    rgba(255,255,255,.15);
+
+    transition:.08s;
+}
+
+.calc-btn:hover{
+
+    filter:brightness(1.18);
+}
+
+.calc-btn:active{
+
+    transform:translateY(3px);
+
+    box-shadow:
+    0 0 0 #0f172a;
+}
+
+
+/* FUNCTION BUTTONS */
 
 .function{
-    background:#3b424a;
-    font-size:12px;
-}
 
-.operator{
-    background:#69737d;
-}
+    background:
+    linear-gradient(
+        180deg,
+        #64748b,
+        #334155
+    );
 
-.number{
-    background:#555e67;
-}
-
-.equal{
-    background:#1769d1;
-}
-
-.clear{
-    background:#398331;
-}
-
-.delete{
-    background:#943d36;
-}
-
-.shift{
-    background:#8a681d;
-}
-
-.alpha{
-    background:#81466c;
-}
-
-.tools{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:10px;
-}
-
-.tools button{
-    background:#343b43;
-    min-height:38px;
-    font-size:12px;
-}
-
-.info{
-    background:white;
-    margin-top:18px;
-    padding:16px;
-    border-radius:14px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-    line-height:1.6;
     font-size:13px;
 }
 
-footer{
-    text-align:center;
-    color:#666;
-    padding:25px;
+
+/* NUMBER BUTTONS */
+
+.number{
+
+    background:
+    linear-gradient(
+        180deg,
+        #475569,
+        #1e293b
+    );
+
+    font-size:18px;
 }
 
-@media(max-width:420px){
 
-    main{
-        padding:0 7px;
+/* OPERATORS */
+
+.operator{
+
+    background:
+    linear-gradient(
+        180deg,
+        #64748b,
+        #334155
+    );
+
+    font-size:20px;
+}
+
+
+/* EQUAL */
+
+.equal{
+
+    background:
+    linear-gradient(
+        180deg,
+        #6477ff,
+        #2563eb
+    );
+
+    font-size:22px;
+}
+
+
+/* CLEAR */
+
+.clear{
+
+    background:
+    linear-gradient(
+        180deg,
+        #9acd32,
+        #65a30d
+    );
+
+    color:#111827;
+}
+
+.delete{
+
+    background:
+    linear-gradient(
+        180deg,
+        #f87171,
+        #dc2626
+    );
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.info-box{
+
+    max-width:480px;
+
+    margin:25px auto 0;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:left;
+
+    box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.07);
+}
+
+.info-box h2{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+}
+
+.info-box p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    background:#111827;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px 20px;
+}
+
+footer p{
+
+    color:#9ca3af;
+
+    margin-top:8px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px){
+
+    .page{
+
+        padding:
+        30px 10px 50px;
+    }
+
+    .page h1{
+
+        font-size:28px;
     }
 
     .calculator{
+
         padding:12px;
+
+        border-radius:18px;
     }
 
-    .keys{
-        gap:5px;
+    .calc-btn{
+
+        height:44px;
+
+        font-size:13px;
     }
 
-    button{
-        min-height:42px;
+    .number{
+
+        font-size:16px;
+    }
+
+    .display{
+
+        font-size:25px;
+    }
+
+    .expression{
+
         font-size:14px;
     }
 
-    .function{
-        font-size:10px;
+    nav{
+
+        padding:
+        12px 4%;
     }
 
-    .expression,
-    .answer{
-        font-size:20px;
+    .logo{
+
+        font-size:23px;
+    }
+
+    .back-btn{
+
+        padding:
+        8px 11px;
+
+        font-size:12px;
     }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<header>
 
-<a class="logo" href="index.html">
-GSKit
-</a>
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<a class="home" href="index.html">
-← Home
-</a>
+<nav>
 
-</header>
+    <a href="index.html"
+       class="logo">
 
+        GS<span>Kit</span>
 
-<main>
+    </a>
 
-<div class="calculator">
+    <a href="index.html"
+       class="back-btn">
 
-<div class="brand">
-GSKit
-</div>
+        ← Back to GSKit
 
-<div class="subtitle">
-ADVANCED SCIENTIFIC CALCULATOR • NATURAL STYLE
-</div>
+    </a>
 
+</nav>
 
-<div class="screen">
 
-<div class="status">
+<!-- =========================
+     MAIN
+========================= -->
 
-<span id="angleMode">
-DEG
-</span>
+<main class="page">
 
-<span id="memoryStatus">
-</span>
+    <h1>
+        🔬 Scientific Calculator
+    </h1>
 
-</div>
+    <p class="page-subtitle">
 
-<div class="expression" id="expression">
-0
-</div>
+        Advanced scientific calculator
+        inspired by classic student calculators.
 
-<div class="answer" id="answer">
-0
-</div>
+    </p>
 
-</div>
 
+    <!-- =========================
+         CALCULATOR
+    ========================= -->
 
-<div class="keys">
+    <div class="calculator">
 
-<button class="shift" onclick="toggleShift()">
-SHIFT
-</button>
 
-<button class="alpha" onclick="toggleAlpha()">
-ALPHA
-</button>
+        <div class="calc-top">
 
-<button class="function" onclick="add('(')">
-(
-</button>
+            <div class="model">
 
-<button class="function" onclick="add(')')">
-)
-</button>
+                GSKit
+                <br>
+                SCIENTIFIC
 
-<button class="delete" onclick="clearAll()">
-AC
-</button>
+            </div>
 
+            <div class="mode"
+                 id="modeText">
 
-<button class="function" onclick="add('sin(')">
-sin
-</button>
+                DEG
 
-<button class="function" onclick="add('cos(')">
-cos
-</button>
+            </div>
 
-<button class="function" onclick="add('tan(')">
-tan
-</button>
+        </div>
 
-<button class="function" onclick="add('log(')">
-log
-</button>
 
-<button class="delete" onclick="backspace()">
-DEL
-</button>
+        <!-- DISPLAY -->
 
+        <div class="display-container">
 
-<button class="function" onclick="add('asin(')">
-sin⁻¹
-</button>
+            <div class="expression"
+                 id="expression">
 
-<button class="function" onclick="add('acos(')">
-cos⁻¹
-</button>
+            </div>
 
-<button class="function" onclick="add('atan(')">
-tan⁻¹
-</button>
+            <input
+                type="text"
+                id="display"
+                class="display"
+                value="0"
+                readonly>
 
-<button class="function" onclick="add('ln(')">
-ln
-</button>
+        </div>
 
-<button class="operator" onclick="add('÷')">
-÷
-</button>
 
+        <!-- ANGLE -->
 
-<button class="function" onclick="add('sqrt(')">
-√
-</button>
+        <div class="angle-row">
 
-<button class="function" onclick="square()">
-x²
-</button>
+            <button
+                class="angle-btn active"
+                id="degBtn"
+                onclick="setAngle('DEG')">
 
-<button class="function" onclick="add('^')">
-xʸ
-</button>
+                DEG
 
-<button class="function" onclick="factorialButton()">
-x!
-</button>
+            </button>
 
-<button class="operator" onclick="add('×')">
-×
-</button>
+            <button
+                class="angle-btn"
+                id="radBtn"
+                onclick="setAngle('RAD')">
 
+                RAD
 
-<button class="function" onclick="add('π')">
-π
-</button>
+            </button>
 
-<button class="function" onclick="add('e')">
-e
-</button>
+        </div>
 
-<button class="function" onclick="add('%')">
-%
-</button>
 
-<button class="function" onclick="add('Ans')">
-Ans
-</button>
+        <!-- BUTTONS -->
 
-<button class="operator" onclick="add('-')">
-−
-</button>
+        <div class="buttons">
 
 
-<button class="number" onclick="add('7')">
-7
-</button>
+            <!-- ROW 1 -->
 
-<button class="number" onclick="add('8')">
-8
-</button>
+            <button
+                class="calc-btn function"
+                onclick="toggleInverse()">
 
-<button class="number" onclick="add('9')">
-9
-</button>
+                2nd
 
-<button class="function" onclick="add('×10^')">
-×10ˣ
-</button>
+            </button>
 
-<button class="operator" onclick="add('+')">
-+
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('sin')">
 
+                sin
 
-<button class="number" onclick="add('4')">
-4
-</button>
+            </button>
 
-<button class="number" onclick="add('5')">
-5
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('cos')">
 
-<button class="number" onclick="add('6')">
-6
-</button>
+                cos
 
-<button class="function" onclick="reciprocal()">
-1/x
-</button>
+            </button>
 
-<button class="operator" onclick="add('^')">
-^
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('tan')">
 
+                tan
 
-<button class="number" onclick="add('1')">
-1
-</button>
+            </button>
 
-<button class="number" onclick="add('2')">
-2
-</button>
+            <button
+                class="calc-btn operator"
+                onclick="insert('÷')">
 
-<button class="number" onclick="add('3')">
-3
-</button>
+                ÷
 
-<button class="function" onclick="add('EXP')">
-EXP
-</button>
+            </button>
 
-<button class="equal" onclick="calculate()">
-=
-</button>
 
+            <!-- ROW 2 -->
 
-<button class="number" onclick="add('0')">
-0
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('asin')">
 
-<button class="number" onclick="add('.')">
-.
-</button>
+                sin⁻¹
 
-<button class="function" onclick="add('(-')">
-(-)
-</button>
+            </button>
 
-<button class="function" onclick="changeAngle()">
-DRG
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('acos')">
 
-<button class="equal" onclick="calculate()">
-=
-</button>
+                cos⁻¹
 
-</div>
+            </button>
 
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('atan')">
 
-<div class="tools">
+                tan⁻¹
 
-<button onclick="memoryAdd()">
-M+
-</button>
+            </button>
 
-<button onclick="memoryRecall()">
-MR
-</button>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('log')">
 
-<button onclick="memoryClear()">
-MC
-</button>
+                log
 
-<button onclick="copyAnswer()">
-Copy Answer
-</button>
+            </button>
 
-</div>
+            <button
+                class="calc-btn operator"
+                onclick="insert('×')">
 
-</div>
+                ×
 
+            </button>
 
-<div class="info">
 
-<b>GSKit Scientific Calculator</b>
+            <!-- ROW 3 -->
 
-<br>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('sqrt')">
 
-Calculate:
+                √
 
-Arithmetic • Trigonometry • Inverse Trigonometry •
-Log • ln • Square Root • Power • Factorial •
-Percentage • π • e • Ans • Memory
+            </button>
 
-<br><br>
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('square')">
 
-<b>DRG:</b> DEG → RAD → GRAD
+                x²
 
-</div>
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('cube')">
+
+                x³
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('ln')">
+
+                ln
+
+            </button>
+
+            <button
+                class="calc-btn operator"
+                onclick="insert('-')">
+
+                −
+
+            </button>
+
+
+            <!-- ROW 4 -->
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('factorial')">
+
+                x!
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="insert('π')">
+
+                π
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="insert('e')">
+
+                e
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="insert('^')">
+
+                xʸ
+
+            </button>
+
+            <button
+                class="calc-btn operator"
+                onclick="insert('+')">
+
+                +
+
+            </button>
+
+
+            <!-- ROW 5 -->
+
+            <button
+                class="calc-btn function"
+                onclick="insert('(')">
+
+                (
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="insert(')')">
+
+                )
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('reciprocal')">
+
+                1/x
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('percent')">
+
+                %
+
+            </button>
+
+            <button
+                class="calc-btn delete"
+                onclick="deleteLast()">
+
+                DEL
+
+            </button>
+
+
+            <!-- ROW 6 -->
+
+            <button
+                class="calc-btn number"
+                onclick="insert('7')">
+
+                7
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('8')">
+
+                8
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('9')">
+
+                9
+
+            </button>
+
+            <button
+                class="calc-btn clear"
+                onclick="clearAll()">
+
+                AC
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="calculateFunction('negate')">
+
+                +/−
+
+            </button>
+
+
+            <!-- ROW 7 -->
+
+            <button
+                class="calc-btn number"
+                onclick="insert('4')">
+
+                4
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('5')">
+
+                5
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('6')">
+
+                6
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('.')">
+
+                .
+
+            </button>
+
+            <button
+                class="calc-btn function"
+                onclick="useAns()">
+
+                Ans
+
+            </button>
+
+
+            <!-- ROW 8 -->
+
+            <button
+                class="calc-btn number"
+                onclick="insert('1')">
+
+                1
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('2')">
+
+                2
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('3')">
+
+                3
+
+            </button>
+
+            <button
+                class="calc-btn number"
+                onclick="insert('0')">
+
+                0
+
+            </button>
+
+            <button
+                class="calc-btn equal"
+                onclick="calculate()">
+
+                =
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- INFO -->
+
+    <div class="info-box">
+
+        <h2>
+            Scientific Calculator
+        </h2>
+
+        <p>
+
+            Use GSKit Scientific Calculator
+            for mathematical calculations including
+            trigonometry, logarithms, powers,
+            square roots, factorials and more.
+
+            You can switch between DEG and RAD
+            modes for trigonometric calculations.
+
+        </p>
+
+    </div>
 
 </main>
 
 
 <footer>
 
-© 2026 GSKit • Learn • Tools • Resources
+    <h3>GSKit</h3>
+
+    <p>
+        Learn • Tools • Resources
+    </p>
+
+    <p>
+        © 2026 GSKit. All Rights Reserved.
+    </p>
 
 </footer>
 
 
 <script>
 
-let expression = "";
-
-let lastAnswer = 0;
-
-let memory = 0;
+/* =========================
+   VARIABLES
+========================= */
 
 let angleMode = "DEG";
 
-let shiftMode = false;
+let answer = 0;
 
-let alphaMode = false;
-
-
-const expressionBox =
-document.getElementById("expression");
-
-const answerBox =
-document.getElementById("answer");
+let inverseMode = false;
 
 
-function refresh(){
+/* =========================
+   DISPLAY
+========================= */
 
-    expressionBox.textContent =
-    expression || "0";
+const display =
+    document.getElementById("display");
 
+const expression =
+    document.getElementById("expression");
+
+
+/* =========================
+   ANGLE MODE
+========================= */
+
+function setAngle(mode){
+
+    angleMode = mode;
+
+    document
+        .getElementById("degBtn")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("radBtn")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById(
+            mode === "DEG"
+            ? "degBtn"
+            : "radBtn"
+        )
+        .classList
+        .add("active");
+
+    document.getElementById("modeText")
+        .innerText = mode;
 }
 
 
-function add(value){
+/* =========================
+   INSERT
+========================= */
 
-    expression += value;
+function insert(value){
 
-    refresh();
+    if(display.value === "0"){
 
+        if(
+            value >= "0" &&
+            value <= "9"
+        ){
+
+            display.value = value;
+
+            return;
+        }
+
+        if(value === "."){
+
+            display.value = "0.";
+
+            return;
+        }
+
+        if(value === "-"){
+
+            display.value = "-";
+
+            return;
+        }
+
+        display.value = "";
+    }
+
+    display.value += value;
 }
 
+
+/* =========================
+   CLEAR
+========================= */
 
 function clearAll(){
 
-    expression = "";
+    display.value = "0";
 
-    answerBox.textContent = "0";
-
-    refresh();
+    expression.innerText = "";
 
 }
 
 
-function backspace(){
+/* =========================
+   DELETE
+========================= */
 
-    expression =
-    expression.slice(0,-1);
+function deleteLast(){
 
-    refresh();
+    if(display.value.length <= 1){
 
+        display.value = "0";
+
+        return;
+    }
+
+    display.value =
+        display.value.slice(0,-1);
 }
 
 
-function toggleShift(){
+/* =========================
+   CONVERT ANGLE
+========================= */
 
-    shiftMode = !shiftMode;
-
-}
-
-
-function toggleAlpha(){
-
-    alphaMode = !alphaMode;
-
-}
-
-
-function changeAngle(){
+function toRadians(value){
 
     if(angleMode === "DEG"){
 
-        angleMode = "RAD";
+        return value * Math.PI / 180;
 
     }
 
-    else if(angleMode === "RAD"){
+    return value;
+}
 
-        angleMode = "GRAD";
+function fromRadians(value){
+
+    if(angleMode === "DEG"){
+
+        return value * 180 / Math.PI;
 
     }
 
-    else{
+    return value;
+}
 
-        angleMode = "DEG";
+
+/* =========================
+   FACTORIAL
+========================= */
+
+function factorial(n){
+
+    if(n < 0){
+
+        throw new Error(
+            "Invalid factorial"
+        );
 
     }
 
-    document.getElementById("angleMode")
-    .textContent = angleMode;
+    if(n === 0 || n === 1){
+
+        return 1;
+
+    }
+
+    let result = 1;
+
+    for(let i=2;i<=n;i++){
+
+        result *= i;
+
+    }
+
+    return result;
+}
+
+
+/* =========================
+   FUNCTION CALCULATOR
+========================= */
+
+function calculateFunction(func){
+
+    let value =
+        parseFloat(display.value);
+
+    if(isNaN(value)){
+
+        display.value = "Error";
+
+        return;
+    }
+
+
+    let result;
+
+
+    try{
+
+        switch(func){
+
+            case "sin":
+
+                result =
+                    inverseMode
+
+                    ?
+
+                    fromRadians(
+                        Math.asin(
+                            toRadians(value)
+                        )
+                    )
+
+                    :
+
+                    Math.sin(
+                        toRadians(value)
+                    );
+
+                break;
+
+
+            case "cos":
+
+                result =
+                    inverseMode
+
+                    ?
+
+                    fromRadians(
+                        Math.acos(
+                            toRadians(value)
+                        )
+                    )
+
+                    :
+
+                    Math.cos(
+                        toRadians(value)
+                    );
+
+                break;
+
+
+            case "tan":
+
+                result =
+                    inverseMode
+
+                    ?
+
+                    fromRadians(
+                        Math.atan(
+                            toRadians(value)
+                        )
+                    )
+
+                    :
+
+                    Math.tan(
+                        toRadians(value)
+                    );
+
+                break;
+
+
+            case "log":
+
+                result =
+                    Math.log10(value);
+
+                break;
+
+
+            case "ln":
+
+                result =
+                    Math.log(value);
+
+                break;
+
+
+            case "sqrt":
+
+                result =
+                    Math.sqrt(value);
+
+                break;
+
+
+            case "square":
+
+                result =
+                    Math.pow(value,2);
+
+                break;
+
+
+            case "cube":
+
+                result =
+                    Math.pow(value,3);
+
+                break;
+
+
+            case "factorial":
+
+                result =
+                    factorial(value);
+
+                break;
+
+
+            case "reciprocal":
+
+                result =
+                    1 / value;
+
+                break;
+
+
+            case "percent":
+
+                result =
+                    value / 100;
+
+                break;
+
+
+            case "negate":
+
+                result =
+                    -value;
+
+                break;
+
+        }
+
+
+        expression.innerText =
+            display.value;
+
+        display.value =
+            formatNumber(result);
+
+        answer = result;
+
+
+    }catch(error){
+
+        display.value = "Error";
+
+    }
 
 }
 
 
-function toRadians(x){
+/* =========================
+   FORMAT NUMBER
+========================= */
 
-    if(angleMode === "DEG")
-        return x * Math.PI / 180;
+function formatNumber(value){
 
-    if(angleMode === "GRAD")
-        return x * Math.PI / 200;
+    if(!isFinite(value)){
 
-    return x;
+        return "Error";
+
+    }
+
+    if(
+        Math.abs(value) < 1e-10
+    ){
+
+        value = 0;
+
+    }
+
+    return Number(
+        value.toPrecision(12)
+    ).toString();
 
 }
 
 
-function fromRadians(x){
+/* =========================
+   EVALUATE EXPRESSION
+========================= */
 
-    if(angleMode === "DEG")
-        return x * 180 / Math.PI;
+function calculate(){
 
-    if(angle
+    let exp =
+        display.value;
+
+    if(!exp){
+
+        return;
+    }
+
+
+    try{
+
+        let jsExpression =
+            exp
+
+            .replace(/π/g,"Math.PI")
+
+            .replace(/\be\b/g,"Math.E")
+
+            .replace(/×/g,"*")
+
+            .replace(/÷/g,"/")
+
+            .replace(/\^/g,"**");
+
+
+        /*
+           Basic safety check.
+           Only mathematical characters
+           are allowed.
+        */
+
+        if(
+            !/^[0-9+\-*/().%\sA-Za-z_*]+$/.test(
+                jsExpression
+            )
+        ){
+
+            throw new Error(
+                "Invalid expression"
+            );
+
+        }
+
+
+        let result =
+            Function(
+                '"use strict"; return (' +
+                jsExpression +
+                ')'
+            )();
+
+
+        if(
+            typeof result !== "number" ||
+            !isFinite(result)
+        ){
+
+            throw new Error(
+                "Math error"
+            );
+
+        }
+
+
+        expression.innerText =
+            exp + " =";
+
+
+        display.value =
+            formatNumber(result);
+
+
+        answer = result;
+
+
+    }catch(error){
+
+        expression.innerText =
+            exp;
+
+        display.value =
+            "Error";
+
+    }
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+function useAns(){
+
+    display.value =
+        formatNumber(answer);
+
+}
+
+
+/* =========================
+   SECOND / INVERSE
+========================= */
+
+function toggleInverse(){
+
+    inverseMode =
+        !inverseMode;
+
+    const buttons =
+        document.querySelectorAll(
+            ".function"
+        );
+
+    buttons.forEach(button=>{
+
+        if(inverseMode){
+
+            button.style.border =
+                "1px solid #84cc16";
+
+        }else{
+
+            button.style.border =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   KEYBOARD SUPPORT
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        const key =
+            event.key;
+
+
+        if(
+            key >= "0" &&
+            key <= "9"
+        ){
+
+            insert(key);
+
+        }
+
+        else if(
+            key === "+" ||
+            key === "-" ||
+            key === "*" ||
+            key === "/" ||
+            key === "." ||
+            key === "(" ||
+            key === ")"
+        ){
+
+            insert(
+                key === "*"
+                ? "×"
+                :
+                key === "/"
+                ? "÷"
+                :
+                key
+            );
+
+        }
+
+        else if(key === "Enter"){
+
+            calculate();
+
+        }
+
+        else if(key === "Backspace"){
+
+            deleteLast();
+
+        }
+
+        else if(key === "Escape"){
+
+            clearAll();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+
+3. Repository मध्ये structure अशी असली पाहिजे
+
+GitHub वर files:
+
+GSKit/
+│
+├── index.html
+├── scientific-calculator.html   ← नवीन file
+│
+├── percentage.html
+├── age-calculator.html
+├── emi-calculator.html
+├── gst-calculator.html
+│
+├── html-notes.html
+├── css-notes.html
+├── operating-system-notes.html
+├── python-notes.html
+│
+└── README.md
