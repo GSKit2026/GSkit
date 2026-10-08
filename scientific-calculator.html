@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scientific Calculator | GSKit</title>
+
+<meta name="description"
+content="GSKit advanced scientific calculator with trigonometry, logarithms, powers, roots, factorial, percentage and more.">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#e9edf2;
+    font-family:Arial,sans-serif;
+    color:#18212b;
+}
+
+header{
+    background:white;
+    padding:15px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    color:#1769d1;
+    text-decoration:none;
+}
+
+.home{
+    color:#1769d1;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+main{
+    max-width:520px;
+    margin:25px auto;
+    padding:0 12px;
+}
+
+.calculator{
+    background:linear-gradient(#30363d,#20252b);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.brand{
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.subtitle{
+    color:#b8c0c8;
+    font-size:11px;
+    margin:4px 0 12px;
+}
+
+.screen{
+    background:#dce8c9;
+    border:8px solid #171a1d;
+    border-radius:8px;
+    padding:8px 12px;
+    min-height:95px;
+    color:#111;
+}
+
+.status{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    height:18px;
+}
+
+.expression{
+    height:40px;
+    text-align:right;
+    font-family:monospace;
+    font-size:23px;
+    overflow:hidden;
+    white-space:nowrap;
+    padding-top:7px;
+}
+
+.answer{
+    text-align:right;
+    font-family:monospace;
+    font-size:23px;
+    font-weight:bold;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.keys{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+    margin-top:14px;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    min-height:45px;
+    background:#4f5963;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 2px 0 #15191d;
+}
+
+button:active{
+    transform:translateY(1px);
+    box-shadow:none;
+}
+
+.function{
+    background:#3b424a;
+    font-size:12px;
+}
+
+.operator{
+    background:#69737d;
+}
+
+.number{
+    background:#555e67;
+}
+
+.equal{
+    background:#1769d1;
+}
+
+.clear{
+    background:#398331;
+}
+
+.delete{
+    background:#943d36;
+}
+
+.shift{
+    background:#8a681d;
+}
+
+.alpha{
+    background:#81466c;
+}
+
+.tools{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:10px;
+}
+
+.tools button{
+    background:#343b43;
+    min-height:38px;
+    font-size:12px;
+}
+
+.info{
+    background:white;
+    margin-top:18px;
+    padding:16px;
+    border-radius:14px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    line-height:1.6;
+    font-size:13px;
+}
+
+footer{
+    text-align:center;
+    color:#666;
+    padding:25px;
+}
+
+@media(max-width:420px){
+
+    main{
+        padding:0 7px;
+    }
+
+    .calculator{
+        padding:12px;
+    }
+
+    .keys{
+        gap:5px;
+    }
+
+    button{
+        min-height:42px;
+        font-size:14px;
+    }
+
+    .function{
+        font-size:10px;
+    }
+
+    .expression,
+    .answer{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">
+GSKit
+</a>
+
+<a class="home" href="index.html">
+← Home
+</a>
+
+</header>
+
+
+<main>
+
+<div class="calculator">
+
+<div class="brand">
+GSKit
+</div>
+
+<div class="subtitle">
+ADVANCED SCIENTIFIC CALCULATOR • NATURAL STYLE
+</div>
+
+
+<div class="screen">
+
+<div class="status">
+
+<span id="angleMode">
+DEG
+</span>
+
+<span id="memoryStatus">
+</span>
+
+</div>
+
+<div class="expression" id="expression">
+0
+</div>
+
+<div class="answer" id="answer">
+0
+</div>
+
+</div>
+
+
+<div class="keys">
+
+<button class="shift" onclick="toggleShift()">
+SHIFT
+</button>
+
+<button class="alpha" onclick="toggleAlpha()">
+ALPHA
+</button>
+
+<button class="function" onclick="add('(')">
+(
+</button>
+
+<button class="function" onclick="add(')')">
+)
+</button>
+
+<button class="delete" onclick="clearAll()">
+AC
+</button>
+
+
+<button class="function" onclick="add('sin(')">
+sin
+</button>
+
+<button class="function" onclick="add('cos(')">
+cos
+</button>
+
+<button class="function" onclick="add('tan(')">
+tan
+</button>
+
+<button class="function" onclick="add('log(')">
+log
+</button>
+
+<button class="delete" onclick="backspace()">
+DEL
+</button>
+
+
+<button class="function" onclick="add('asin(')">
+sin⁻¹
+</button>
+
+<button class="function" onclick="add('acos(')">
+cos⁻¹
+</button>
+
+<button class="function" onclick="add('atan(')">
+tan⁻¹
+</button>
+
+<button class="function" onclick="add('ln(')">
+ln
+</button>
+
+<button class="operator" onclick="add('÷')">
+÷
+</button>
+
+
+<button class="function" onclick="add('sqrt(')">
+√
+</button>
+
+<button class="function" onclick="square()">
+x²
+</button>
+
+<button class="function" onclick="add('^')">
+xʸ
+</button>
+
+<button class="function" onclick="factorialButton()">
+x!
+</button>
+
+<button class="operator" onclick="add('×')">
+×
+</button>
+
+
+<button class="function" onclick="add('π')">
+π
+</button>
+
+<button class="function" onclick="add('e')">
+e
+</button>
+
+<button class="function" onclick="add('%')">
+%
+</button>
+
+<button class="function" onclick="add('Ans')">
+Ans
+</button>
+
+<button class="operator" onclick="add('-')">
+−
+</button>
+
+
+<button class="number" onclick="add('7')">
+7
+</button>
+
+<button class="number" onclick="add('8')">
+8
+</button>
+
+<button class="number" onclick="add('9')">
+9
+</button>
+
+<button class="function" onclick="add('×10^')">
+×10ˣ
+</button>
+
+<button class="operator" onclick="add('+')">
++
+</button>
+
+
+<button class="number" onclick="add('4')">
+4
+</button>
+
+<button class="number" onclick="add('5')">
+5
+</button>
+
+<button class="number" onclick="add('6')">
+6
+</button>
+
+<button class="function" onclick="reciprocal()">
+1/x
+</button>
+
+<button class="operator" onclick="add('^')">
+^
+</button>
+
+
+<button class="number" onclick="add('1')">
+1
+</button>
+
+<button class="number" onclick="add('2')">
+2
+</button>
+
+<button class="number" onclick="add('3')">
+3
+</button>
+
+<button class="function" onclick="add('EXP')">
+EXP
+</button>
+
+<button class="equal" onclick="calculate()">
+=
+</button>
+
+
+<button class="number" onclick="add('0')">
+0
+</button>
+
+<button class="number" onclick="add('.')">
+.
+</button>
+
+<button class="function" onclick="add('(-')">
+(-)
+</button>
+
+<button class="function" onclick="changeAngle()">
+DRG
+</button>
+
+<button class="equal" onclick="calculate()">
+=
+</button>
+
+</div>
+
+
+<div class="tools">
+
+<button onclick="memoryAdd()">
+M+
+</button>
+
+<button onclick="memoryRecall()">
+MR
+</button>
+
+<button onclick="memoryClear()">
+MC
+</button>
+
+<button onclick="copyAnswer()">
+Copy Answer
+</button>
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<b>GSKit Scientific Calculator</b>
+
+<br>
+
+Calculate:
+
+Arithmetic • Trigonometry • Inverse Trigonometry •
+Log • ln • Square Root • Power • Factorial •
+Percentage • π • e • Ans • Memory
+
+<br><br>
+
+<b>DRG:</b> DEG → RAD → GRAD
+
+</div>
+
+</main>
+
+
+<footer>
+
+© 2026 GSKit • Learn • Tools • Resources
+
+</footer>
+
+
+<script>
+
+let expression = "";
+
+let lastAnswer = 0;
+
+let memory = 0;
+
+let angleMode = "DEG";
+
+let shiftMode = false;
+
+let alphaMode = false;
+
+
+const expressionBox =
+document.getElementById("expression");
+
+const answerBox =
+document.getElementById("answer");
+
+
+function refresh(){
+
+    expressionBox.textContent =
+    expression || "0";
+
+}
+
+
+function add(value){
+
+    expression += value;
+
+    refresh();
+
+}
+
+
+function clearAll(){
+
+    expression = "";
+
+    answerBox.textContent = "0";
+
+    refresh();
+
+}
+
+
+function backspace(){
+
+    expression =
+    expression.slice(0,-1);
+
+    refresh();
+
+}
+
+
+function toggleShift(){
+
+    shiftMode = !shiftMode;
+
+}
+
+
+function toggleAlpha(){
+
+    alphaMode = !alphaMode;
+
+}
+
+
+function changeAngle(){
+
+    if(angleMode === "DEG"){
+
+        angleMode = "RAD";
+
+    }
+
+    else if(angleMode === "RAD"){
+
+        angleMode = "GRAD";
+
+    }
+
+    else{
+
+        angleMode = "DEG";
+
+    }
+
+    document.getElementById("angleMode")
+    .textContent = angleMode;
+
+}
+
+
+function toRadians(x){
+
+    if(angleMode === "DEG")
+        return x * Math.PI / 180;
+
+    if(angleMode === "GRAD")
+        return x * Math.PI / 200;
+
+    return x;
+
+}
+
+
+function fromRadians(x){
+
+    if(angleMode === "DEG")
+        return x * 180 / Math.PI;
+
+    if(angle
