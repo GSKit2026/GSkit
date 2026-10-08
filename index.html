@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>GSKit | Learn • Tools • Resources</title>
 
-<meta name="description" content="GSKit provides free calculators, BCA notes, coding tools, MCQ tests and useful student resources.">
+<meta name="description"
+content="GSKit provides free calculators, BCA notes, coding tools, MCQ tests and useful student resources.">
+
 <meta name="robots" content="index, follow">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -17,10 +21,16 @@
     font-family:Arial,sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:#f5f7fb;
     color:#1f2937;
 }
+
+/* ================= NAVBAR ================= */
 
 nav{
     width:100%;
@@ -100,6 +110,8 @@ button{
     font-weight:bold;
 }
 
+/* ================= HERO ================= */
+
 .hero{
     text-align:center;
     padding:80px 20px;
@@ -134,6 +146,22 @@ button{
     font-weight:bold;
 }
 
+/* ================= AD ================= */
+
+.ad-slot{
+    margin:10px auto 40px;
+    max-width:900px;
+    height:90px;
+    border:1px dashed #cbd5e1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#94a3b8;
+    background:white;
+}
+
+/* ================= SECTIONS ================= */
+
 section{
     padding:60px 6%;
 }
@@ -151,6 +179,8 @@ section{
 .section-title p{
     color:#64748b;
 }
+
+/* ================= CARDS ================= */
 
 .cards{
     display:grid;
@@ -187,25 +217,37 @@ section{
     line-height:1.6;
 }
 
-.card a{
+.card a,
+.card button{
     display:inline-block;
     margin-top:15px;
     color:#2563eb;
+    background:none;
     text-decoration:none;
     font-weight:bold;
+    font-size:15px;
 }
 
-.ad-slot{
-    margin:10px auto 40px;
-    max-width:900px;
-    height:90px;
-    border:1px dashed #cbd5e1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#94a3b8;
-    background:white;
+/* ================= SCIENTIFIC CALCULATOR CARD ================= */
+
+.scientific-card{
+    border:2px solid transparent;
 }
+
+.scientific-card:hover{
+    border-color:#2563eb;
+}
+
+.scientific-image{
+    width:100%;
+    height:180px;
+    object-fit:contain;
+    margin-bottom:10px;
+    border-radius:10px;
+    background:#f8fafc;
+}
+
+/* ================= ABOUT ================= */
 
 .about{
     background:white;
@@ -218,6 +260,8 @@ section{
     line-height:1.8;
     color:#64748b;
 }
+
+/* ================= PROFILE ================= */
 
 #profileSection{
     display:none;
@@ -270,6 +314,8 @@ section{
     margin-bottom:5px;
 }
 
+/* ================= MODAL ================= */
+
 .modal{
     display:none;
     position:fixed;
@@ -290,6 +336,8 @@ section{
     padding:30px;
     position:relative;
     box-shadow:0 20px 60px rgba(0,0,0,.25);
+    max-height:90vh;
+    overflow-y:auto;
 }
 
 .close{
@@ -403,6 +451,96 @@ section{
     margin-bottom:10px;
 }
 
+/* ================= SCIENTIFIC CALCULATOR ================= */
+
+.scientific-modal .modal-box{
+    max-width:470px;
+    background:#111827;
+    padding:20px;
+}
+
+.calculator-title{
+    color:white;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.calculator-title h2{
+    color:#60a5fa;
+}
+
+.calculator-display{
+    background:#dff6d8;
+    color:#111827;
+    min-height:85px;
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:15px;
+    text-align:right;
+    overflow:hidden;
+}
+
+.calc-expression{
+    min-height:25px;
+    color:#475569;
+    font-size:16px;
+    word-break:break-all;
+}
+
+.calc-result{
+    font-size:28px;
+    font-weight:bold;
+    word-break:break-all;
+}
+
+.calc-buttons{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+}
+
+.calc-btn{
+    min-height:50px;
+    border-radius:8px;
+    background:#374151;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.calc-btn:hover{
+    background:#4b5563;
+}
+
+.calc-number{
+    background:#1f2937;
+}
+
+.calc-operator{
+    background:#2563eb;
+}
+
+.calc-function{
+    background:#475569;
+}
+
+.calc-danger{
+    background:#dc2626;
+}
+
+.calc-equal{
+    background:#16a34a;
+}
+
+.calculator-info{
+    color:#94a3b8;
+    text-align:center;
+    margin-top:12px;
+    font-size:12px;
+}
+
+/* ================= FOOTER ================= */
+
 footer{
     background:#111827;
     color:white;
@@ -425,10 +563,14 @@ footer p{
     margin:0 8px;
 }
 
+/* ================= RESPONSIVE ================= */
+
 @media(max-width:900px){
+
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 @media(max-width:600px){
@@ -479,11 +621,30 @@ footer p{
     .user-mini span{
         display:none;
     }
+
+    .scientific-image{
+        height:150px;
+    }
+
+    .calc-buttons{
+        gap:5px;
+    }
+
+    .calc-btn{
+        min-height:45px;
+        font-size:14px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- ================= NAVBAR ================= -->
 
 <nav>
 
@@ -494,26 +655,51 @@ footer p{
     <div class="nav-buttons">
 
         <div class="user-mini" id="userArea">
-            <div class="user-avatar" id="navAvatar">G</div>
-            <span id="navUserName">Hi, User</span>
+
+            <div class="user-avatar" id="navAvatar">
+                G
+            </div>
+
+            <span id="navUserName">
+                Hi, User
+            </span>
+
         </div>
 
-        <button class="login-btn" id="loginBtn" onclick="openLogin()">
+        <button
+            class="login-btn"
+            id="loginBtn"
+            onclick="openLogin()">
+
             Login
+
         </button>
 
-        <button class="signup-btn" id="signupBtn" onclick="openSignup()">
+        <button
+            class="signup-btn"
+            id="signupBtn"
+            onclick="openSignup()">
+
             Create Account
+
         </button>
 
-        <button class="logout-btn" id="logoutBtn"
-                onclick="logout()" style="display:none">
+        <button
+            class="logout-btn"
+            id="logoutBtn"
+            onclick="logout()"
+            style="display:none">
+
             Logout
+
         </button>
 
     </div>
 
 </nav>
+
+
+<!-- ================= HERO ================= -->
 
 <div class="hero">
 
@@ -522,10 +708,15 @@ footer p{
     </h1>
 
     <p>
+
         Learn • Tools • Resources
+
         <br>
+
         Free calculators, BCA notes, coding tools,
-        MCQ tests and useful student resources — all in one place.
+        MCQ tests and useful student resources —
+        all in one place.
+
     </p>
 
     <a href="#calculators" class="hero-btn">
@@ -534,173 +725,476 @@ footer p{
 
 </div>
 
+
+<!-- ================= AD ================= -->
+
 <div class="ad-slot">
     Advertisement
 </div>
 
+
+<!-- ================= CALCULATORS ================= -->
+
 <section id="calculators">
 
     <div class="section-title">
+
         <h2>🧮 Online Calculators</h2>
-        <p>Useful calculators for students and everyday life.</p>
+
+        <p>
+            Useful calculators for students and everyday life.
+        </p>
+
     </div>
+
 
     <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">📊</div>
-            <h3>Percentage Calculator</h3>
-            <p>Calculate percentage and marks quickly.</p>
-            <a href="percentage.html">Open Calculator →</a>
-        </div>
+
+        <!-- Percentage -->
 
         <div class="card">
-            <div class="card-icon">🎂</div>
-            <h3>Age Calculator</h3>
-            <p>Calculate your exact age easily.</p>
-            <a href="age-calculator.html">Open Calculator →</a>
+
+            <div class="card-icon">
+                📊
+            </div>
+
+            <h3>
+                Percentage Calculator
+            </h3>
+
+            <p>
+                Calculate percentage and marks quickly.
+            </p>
+
+            <a href="percentage.html">
+                Open Calculator →
+            </a>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">💰</div>
-            <h3>EMI Calculator</h3>
-            <p>Calculate loan EMI and repayment.</p>
-            <a href="emi-calculator.html">Open Calculator →</a>
-        </div>
+
+        <!-- Age -->
 
         <div class="card">
-            <div class="card-icon">🧾</div>
-            <h3>GST Calculator</h3>
-            <p>Calculate GST amount quickly.</p>
-            <a href="gst-calculator.html">Open Calculator →</a>
+
+            <div class="card-icon">
+                🎂
+            </div>
+
+            <h3>
+                Age Calculator
+            </h3>
+
+            <p>
+                Calculate your exact age easily.
+            </p>
+
+            <a href="age-calculator.html">
+                Open Calculator →
+            </a>
+
         </div>
+
+
+        <!-- EMI -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                💰
+            </div>
+
+            <h3>
+                EMI Calculator
+            </h3>
+
+            <p>
+                Calculate loan EMI and repayment.
+            </p>
+
+            <a href="emi-calculator.html">
+                Open Calculator →
+            </a>
+
+        </div>
+
+
+        <!-- GST -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🧾
+            </div>
+
+            <h3>
+                GST Calculator
+            </h3>
+
+            <p>
+                Calculate GST amount quickly.
+            </p>
+
+            <a href="gst-calculator.html">
+                Open Calculator →
+            </a>
+
+        </div>
+
+
+        <!-- ================= SCIENTIFIC CALCULATOR ================= -->
+
+        <div class="card scientific-card">
+
+            <img
+                src="scientific-calculator.jpg"
+                alt="Scientific Calculator"
+                class="scientific-image">
+
+            <h3>
+                Scientific Calculator
+            </h3>
+
+            <p>
+                Advanced calculator with
+                sin, cos, tan, log, √, powers and more.
+            </p>
+
+            <button onclick="openScientificCalculator()">
+                Open Calculator →
+            </button>
+
+        </div>
+
 
     </div>
 
 </section>
 
+
+<!-- ================= BCA NOTES ================= -->
+
 <section>
 
     <div class="section-title">
+
         <h2>🎓 BCA Notes</h2>
-        <p>Easy study material for BCA students.</p>
+
+        <p>
+            Easy study material for BCA students.
+        </p>
+
     </div>
+
 
     <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">🌐</div>
-            <h3>HTML Notes</h3>
-            <p>Learn HTML concepts, tags and examples.</p>
-            <a href="html-notes.html">Read Notes →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">🎨</div>
-            <h3>CSS Notes</h3>
-            <p>Learn CSS properties and web designing.</p>
-            <a href="css-notes.html">Read Notes →</a>
+
+            <div class="card-icon">
+                🌐
+            </div>
+
+            <h3>
+                HTML Notes
+            </h3>
+
+            <p>
+                Learn HTML concepts, tags and examples.
+            </p>
+
+            <a href="html-notes.html">
+                Read Notes →
+            </a>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">💻</div>
-            <h3>Operating System</h3>
-            <p>Important OS topics and exam notes.</p>
-            <a href="operating-system-notes.html">Read Notes →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">🐍</div>
-            <h3>Python Notes</h3>
-            <p>Python basics, programs and concepts.</p>
-            <a href="python-notes.html">Read Notes →</a>
+
+            <div class="card-icon">
+                🎨
+            </div>
+
+            <h3>
+                CSS Notes
+            </h3>
+
+            <p>
+                Learn CSS properties and web designing.
+            </p>
+
+            <a href="css-notes.html">
+                Read Notes →
+            </a>
+
         </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <h3>
+                Operating System
+            </h3>
+
+            <p>
+                Important OS topics and exam notes.
+            </p>
+
+            <a href="operating-system-notes.html">
+                Read Notes →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🐍
+            </div>
+
+            <h3>
+                Python Notes
+            </h3>
+
+            <p>
+                Python basics, programs and concepts.
+            </p>
+
+            <a href="python-notes.html">
+                Read Notes →
+            </a>
+
+        </div>
+
 
     </div>
 
 </section>
 
+
+<!-- ================= MCQ ================= -->
+
 <section>
 
     <div class="section-title">
+
         <h2>📝 MCQ & Tests</h2>
-        <p>Practice questions and 20 marks tests.</p>
+
+        <p>
+            Practice questions and 20 marks tests.
+        </p>
+
     </div>
+
 
     <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">❓</div>
-            <h3>MCQ Practice</h3>
-            <p>Practice important multiple choice questions.</p>
-            <a href="mcq.html">Start Practice →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">🏆</div>
-            <h3>20 Marks Test</h3>
-            <p>Test your preparation with exam-style questions.</p>
-            <a href="mcq.html">Start Test →</a>
+
+            <div class="card-icon">
+                ❓
+            </div>
+
+            <h3>
+                MCQ Practice
+            </h3>
+
+            <p>
+                Practice important multiple choice questions.
+            </p>
+
+            <a href="mcq.html">
+                Start Practice →
+            </a>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🎯</div>
-            <h3>Viva Questions</h3>
-            <p>Prepare important viva questions.</p>
-            <a href="mcq.html">Practice →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">📚</div>
-            <h3>Important Questions</h3>
-            <p>Important questions for exam preparation.</p>
-            <a href="bca-notes.html">View →</a>
+
+            <div class="card-icon">
+                🏆
+            </div>
+
+            <h3>
+                20 Marks Test
+            </h3>
+
+            <p>
+                Test your preparation with exam-style questions.
+            </p>
+
+            <a href="mcq.html">
+                Start Test →
+            </a>
+
         </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <h3>
+                Viva Questions
+            </h3>
+
+            <p>
+                Prepare important viva questions.
+            </p>
+
+            <a href="mcq.html">
+                Practice →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <h3>
+                Important Questions
+            </h3>
+
+            <p>
+                Important questions for exam preparation.
+            </p>
+
+            <a href="bca-notes.html">
+                View →
+            </a>
+
+        </div>
+
 
     </div>
 
 </section>
+
+
+<!-- ================= CODING TOOLS ================= -->
 
 <section>
 
     <div class="section-title">
+
         <h2>💻 Coding & Useful Tools</h2>
-        <p>Simple online tools for students and developers.</p>
+
+        <p>
+            Simple online tools for students and developers.
+        </p>
+
     </div>
+
 
     <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">⌨️</div>
-            <h3>HTML Editor</h3>
-            <p>Write and test HTML code online.</p>
-            <a href="coding-tools.html">Open Tool →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">🔗</div>
-            <h3>QR Code Generator</h3>
-            <p>Create QR codes easily.</p>
-            <a href="coding-tools.html">Open Tool →</a>
+
+            <div class="card-icon">
+                ⌨️
+            </div>
+
+            <h3>
+                HTML Editor
+            </h3>
+
+            <p>
+                Write and test HTML code online.
+            </p>
+
+            <a href="coding-tools.html">
+                Open Tool →
+            </a>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🔤</div>
-            <h3>Word Counter</h3>
-            <p>Count words and characters instantly.</p>
-            <a href="coding-tools.html">Open Tool →</a>
-        </div>
 
         <div class="card">
-            <div class="card-icon">🔐</div>
-            <h3>Password Generator</h3>
-            <p>Generate strong random passwords.</p>
-            <a href="coding-tools.html">Open Tool →</a>
+
+            <div class="card-icon">
+                🔗
+            </div>
+
+            <h3>
+                QR Code Generator
+            </h3>
+
+            <p>
+                Create QR codes easily.
+            </p>
+
+            <a href="coding-tools.html">
+                Open Tool →
+            </a>
+
         </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔤
+            </div>
+
+            <h3>
+                Word Counter
+            </h3>
+
+            <p>
+                Count words and characters instantly.
+            </p>
+
+            <a href="coding-tools.html">
+                Open Tool →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔐
+            </div>
+
+            <h3>
+                Password Generator
+            </h3>
+
+            <p>
+                Generate strong random passwords.
+            </p>
+
+            <a href="coding-tools.html">
+                Open Tool →
+            </a>
+
+        </div>
+
 
     </div>
 
 </section>
+
+
+<!-- ================= PROFILE ================= -->
 
 <section id="profileSection">
 
@@ -716,101 +1210,189 @@ footer p{
                 User
             </h2>
 
-            <p>GSKit Account</p>
+            <p>
+                GSKit Account
+            </p>
 
         </div>
 
+
         <div class="profile-details">
 
-            <div class="detail-box">
-                <small>Full Name</small>
-                <strong id="profileFullName">-</strong>
-            </div>
 
             <div class="detail-box">
-                <small>Mobile Number</small>
-                <strong id="profileMobile">-</strong>
+
+                <small>
+                    Full Name
+                </small>
+
+                <strong id="profileFullName">
+                    -
+                </strong>
+
             </div>
 
-            <div class="detail-box">
-                <small>Birth Date</small>
-                <strong id="profileDOB">-</strong>
-            </div>
 
             <div class="detail-box">
-                <small>Account Status</small>
-                <strong>Active</strong>
+
+                <small>
+                    Mobile Number
+                </small>
+
+                <strong id="profileMobile">
+                    -
+                </strong>
+
             </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Birth Date
+                </small>
+
+                <strong id="profileDOB">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Account Status
+                </small>
+
+                <strong>
+                    Active
+                </strong>
+
+            </div>
+
 
         </div>
 
     </div>
 
 </section>
+
+
+<!-- ================= ABOUT ================= -->
 
 <section class="about">
 
     <div class="section-title">
-        <h2>About GSKit</h2>
+
+        <h2>
+            About GSKit
+        </h2>
+
     </div>
 
+
     <p>
-        GSKit is a student-focused online platform designed to provide
-        useful calculators, BCA notes, coding tools, MCQ practice and
-        helpful educational resources in one simple place.
+
+        GSKit is a student-focused online platform designed
+        to provide useful calculators, BCA notes, coding tools,
+        MCQ practice and helpful educational resources in one
+        simple place.
+
     </p>
 
 </section>
 
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
 
-    <h2>GSKit</h2>
+    <h2>
+        GSKit
+    </h2>
 
-    <p>Learn • Tools • Resources</p>
+    <p>
+        Learn • Tools • Resources
+    </p>
+
 
     <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html">Terms</a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="privacy-policy.html">
+            Privacy Policy
+        </a>
+
+        <a href="terms.html">
+            Terms
+        </a>
+
     </div>
 
-    <p>© 2026 GSKit. All Rights Reserved.</p>
+
+    <p>
+        © 2026 GSKit. All Rights Reserved.
+    </p>
 
 </footer>
 
 
-<!-- LOGIN -->
+<!-- =====================================================
+                     LOGIN MODAL
+===================================================== -->
 
 <div class="modal" id="loginModal">
 
     <div class="modal-box">
 
-        <div class="close" onclick="closeLogin()">×</div>
+        <div class="close" onclick="closeLogin()">
+            ×
+        </div>
+
 
         <div class="auth-logo">
             GS<span>Kit</span>
         </div>
 
+
         <div class="auth-subtitle">
             Login to your GSKit account
         </div>
 
+
         <form onsubmit="login(event)">
 
+
             <div class="input-group">
-                <label>Mobile Number</label>
+
+                <label>
+                    Mobile Number
+                </label>
+
                 <input
                     type="tel"
                     id="loginMobile"
                     maxlength="10"
                     placeholder="Enter 10 digit mobile number"
                     required>
+
             </div>
+
 
             <div class="input-group">
 
-                <label>Password</label>
+                <label>
+                    Password
+                </label>
+
 
                 <div class="password-wrap">
 
@@ -820,36 +1402,57 @@ footer p{
                         placeholder="Enter password"
                         required>
 
+
                     <button
                         type="button"
                         class="eye-btn"
                         onclick="togglePassword('loginPassword',this)">
+
                         👁
+
                     </button>
 
                 </div>
 
             </div>
 
+
             <div class="forgot">
-                <button type="button" onclick="forgotPassword()">
+
+                <button
+                    type="button"
+                    onclick="forgotPassword()">
+
                     Forgot Password?
+
                 </button>
+
             </div>
+
 
             <div id="loginMessage"></div>
 
-            <button class="submit-btn" type="submit">
+
+            <button
+                class="submit-btn"
+                type="submit">
+
                 Login
+
             </button>
+
 
         </form>
 
+
         <div class="switch-auth">
+
             Don't have an account?
+
             <button onclick="switchToSignup()">
                 Create Account
             </button>
+
         </div>
 
     </div>
@@ -857,54 +1460,83 @@ footer p{
 </div>
 
 
-<!-- SIGNUP -->
+<!-- =====================================================
+                     SIGNUP MODAL
+===================================================== -->
 
 <div class="modal" id="signupModal">
 
     <div class="modal-box">
 
-        <div class="close" onclick="closeSignup()">×</div>
+        <div class="close" onclick="closeSignup()">
+            ×
+        </div>
+
 
         <div class="auth-logo">
             GS<span>Kit</span>
         </div>
 
+
         <div class="auth-subtitle">
             Create your GSKit account
         </div>
 
+
         <form onsubmit="createAccount(event)">
 
+
             <div class="input-group">
-                <label>Full Name</label>
+
+                <label>
+                    Full Name
+                </label>
+
                 <input
                     type="text"
                     id="signupName"
                     placeholder="Enter your full name"
                     required>
+
             </div>
 
+
             <div class="input-group">
-                <label>Mobile Number</label>
+
+                <label>
+                    Mobile Number
+                </label>
+
                 <input
                     type="tel"
                     id="signupMobile"
                     maxlength="10"
                     placeholder="Enter 10 digit mobile number"
                     required>
+
             </div>
 
+
             <div class="input-group">
-                <label>Birth Date</label>
+
+                <label>
+                    Birth Date
+                </label>
+
                 <input
                     type="date"
                     id="signupDOB"
                     required>
+
             </div>
+
 
             <div class="input-group">
 
-                <label>Password</label>
+                <label>
+                    Password
+                </label>
+
 
                 <div class="password-wrap">
 
@@ -914,20 +1546,27 @@ footer p{
                         placeholder="Create password"
                         required>
 
+
                     <button
                         type="button"
                         class="eye-btn"
                         onclick="togglePassword('signupPassword',this)">
+
                         👁
+
                     </button>
 
                 </div>
 
             </div>
 
+
             <div class="input-group">
 
-                <label>Confirm Password</label>
+                <label>
+                    Confirm Password
+                </label>
+
 
                 <div class="password-wrap">
 
@@ -937,30 +1576,370 @@ footer p{
                         placeholder="Confirm password"
                         required>
 
+
                     <button
                         type="button"
                         class="eye-btn"
                         onclick="togglePassword('signupConfirmPassword',this)">
+
                         👁
+
                     </button>
 
                 </div>
 
             </div>
 
+
             <div id="signupMessage"></div>
 
-            <button class="submit-btn" type="submit">
+
+            <button
+                class="submit-btn"
+                type="submit">
+
                 Create Account
+
             </button>
+
 
         </form>
 
+
         <div class="switch-auth">
+
             Already have an account?
+
             <button onclick="switchToLogin()">
                 Login
             </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+              SCIENTIFIC CALCULATOR MODAL
+===================================================== -->
+
+<div class="modal scientific-modal" id="scientificModal">
+
+    <div class="modal-box">
+
+        <div
+            class="close"
+            onclick="closeScientificCalculator()"
+            style="color:white">
+
+            ×
+
+        </div>
+
+
+        <div class="calculator-title">
+
+            <h2>
+                Scientific Calculator
+            </h2>
+
+            <p>
+                GSKit
+            </p>
+
+        </div>
+
+
+        <div class="calculator-display">
+
+            <div
+                class="calc-expression"
+                id="calcExpression">
+
+            </div>
+
+            <div
+                class="calc-result"
+                id="calcResult">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="calc-buttons">
+
+
+            <!-- ROW 1 -->
+
+            <button
+                class="calc-btn calc-danger"
+                onclick="clearCalculator()">
+
+                AC
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="deleteLast()">
+
+                DEL
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('sqrt')">
+
+                √
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('square')">
+
+                x²
+
+            </button>
+
+            <button
+                class="calc-btn calc-operator"
+                onclick="addOperator('/')">
+
+                ÷
+
+            </button>
+
+
+            <!-- ROW 2 -->
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('sin')">
+
+                sin
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('cos')">
+
+                cos
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('tan')">
+
+                tan
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('log')">
+
+                log
+
+            </button>
+
+            <button
+                class="calc-btn calc-operator"
+                onclick="addOperator('*')">
+
+                ×
+
+            </button>
+
+
+            <!-- ROW 3 -->
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('7')">
+
+                7
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('8')">
+
+                8
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('9')">
+
+                9
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('ln')">
+
+                ln
+
+            </button>
+
+            <button
+                class="calc-btn calc-operator"
+                onclick="addOperator('-')">
+
+                −
+
+            </button>
+
+
+            <!-- ROW 4 -->
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('4')">
+
+                4
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('5')">
+
+                5
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('6')">
+
+                6
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="addConstant('pi')">
+
+                π
+
+            </button>
+
+            <button
+                class="calc-btn calc-operator"
+                onclick="addOperator('+')">
+
+                +
+
+            </button>
+
+
+            <!-- ROW 5 -->
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('1')">
+
+                1
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('2')">
+
+                2
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('3')">
+
+                3
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="addConstant('e')">
+
+                e
+
+            </button>
+
+            <button
+                class="calc-btn calc-equal"
+                onclick="calculateResult()">
+
+                =
+
+            </button>
+
+
+            <!-- ROW 6 -->
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addNumber('0')">
+
+                0
+
+            </button>
+
+            <button
+                class="calc-btn calc-number"
+                onclick="addDecimal()">
+
+                .
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('inverse')">
+
+                1/x
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('percent')">
+
+                %
+
+            </button>
+
+            <button
+                class="calc-btn calc-function"
+                onclick="calculateFunction('factorial')">
+
+                n!
+
+            </button>
+
+
+        </div>
+
+
+        <div class="calculator-info">
+
+            Scientific functions use degrees for
+            sin / cos / tan.
+
         </div>
 
     </div>
@@ -970,54 +1949,876 @@ footer p{
 
 <script>
 
+/* =====================================================
+                    AUTH SYSTEM
+===================================================== */
+
+
 function openLogin(){
+
     document.getElementById("loginModal").style.display="flex";
+
 }
+
 
 function closeLogin(){
+
     document.getElementById("loginModal").style.display="none";
+
 }
+
 
 function openSignup(){
+
     document.getElementById("signupModal").style.display="flex";
+
 }
+
 
 function closeSignup(){
+
     document.getElementById("signupModal").style.display="none";
+
 }
+
 
 function switchToSignup(){
+
     closeLogin();
+
     openSignup();
+
 }
 
+
 function switchToLogin(){
+
     closeSignup();
+
     openLogin();
+
 }
+
 
 function togglePassword(id,button){
 
     const input=document.getElementById(id);
 
     if(input.type==="password"){
+
         input.type="text";
+
         button.innerHTML="🙈";
+
     }
     else{
+
         input.type="password";
+
         button.innerHTML="👁";
+
     }
+
 }
+
 
 function validMobile(mobile){
+
     return /^[6-9][0-9]{9}$/.test(mobile);
+
 }
 
+
+/* ================= CREATE ACCOUNT ================= */
 
 function createAccount(event){
 
     event.preventDefault();
 
-    const name=document.getElementById("signupName").value.trim();
-    const mobile=document.getElementById("signupMobil
+
+    const name=
+        document.getElementById("signupName").value.trim();
+
+    const mobile=
+        document.getElementById("signupMobile").value.trim();
+
+    const dob=
+        document.getElementById("signupDOB").value;
+
+    const password=
+        document.getElementById("signupPassword").value;
+
+    const confirmPassword=
+        document.getElementById("signupConfirmPassword").value;
+
+    const message=
+        document.getElementById("signupMessage");
+
+
+    message.innerHTML="";
+
+
+    if(name.length < 3){
+
+        message.innerHTML=
+        '<div class="error">Please enter a valid name.</div>';
+
+        return;
+
+    }
+
+
+    if(!validMobile(mobile)){
+
+        message.innerHTML=
+        '<div class="error">Please enter a valid 10 digit mobile number.</div>';
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        message.innerHTML=
+        '<div class="error">Password must contain at least 6 characters.</div>';
+
+        return;
+
+    }
+
+
+    if(password !== confirmPassword){
+
+        message.innerHTML=
+        '<div class="error">Passwords do not match.</div>';
+
+        return;
+
+    }
+
+
+    const existingUser=
+        JSON.parse(localStorage.getItem("gskitUser"));
+
+
+    if(existingUser && existingUser.mobile===mobile){
+
+        message.innerHTML=
+        '<div class="error">Account already exists with this mobile number.</div>';
+
+        return;
+
+    }
+
+
+    const user={
+
+        name:name,
+        mobile:mobile,
+        dob:dob,
+        password:password
+
+    };
+
+
+    localStorage.setItem(
+        "gskitUser",
+        JSON.stringify(user)
+    );
+
+
+    message.innerHTML=
+    '<div class="success">Account created successfully!</div>';
+
+
+    setTimeout(function(){
+
+        closeSignup();
+
+        openLogin();
+
+    },1000);
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function login(event){
+
+    event.preventDefault();
+
+
+    const mobile=
+        document.getElementById("loginMobile").value.trim();
+
+    const password=
+        document.getElementById("loginPassword").value;
+
+
+    const message=
+        document.getElementById("loginMessage");
+
+
+    message.innerHTML="";
+
+
+    if(!validMobile(mobile)){
+
+        message.innerHTML=
+        '<div class="error">Enter a valid mobile number.</div>';
+
+        return;
+
+    }
+
+
+    const user=
+        JSON.parse(localStorage.getItem("gskitUser"));
+
+
+    if(!user){
+
+        message.innerHTML=
+        '<div class="error">Account not found. Please create an account.</div>';
+
+        return;
+
+    }
+
+
+    if(user.mobile !== mobile ||
+       user.password !== password){
+
+        message.innerHTML=
+        '<div class="error">Incorrect mobile number or password.</div>';
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "gskitLoggedIn",
+        "true"
+    );
+
+
+    message.innerHTML=
+    '<div class="success">Login successful!</div>';
+
+
+    setTimeout(function(){
+
+        closeLogin();
+
+        updateUserUI();
+
+        document
+        .getElementById("profileSection")
+        .style.display="block";
+
+        document
+        .getElementById("profileSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    },500);
+
+}
+
+
+/* ================= FORGOT PASSWORD ================= */
+
+function forgotPassword(){
+
+    const user=
+        JSON.parse(localStorage.getItem("gskitUser"));
+
+
+    if(!user){
+
+        alert(
+            "No account found. Please create an account first."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "For demo version, your registered password is: "
+        + user.password
+    );
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    localStorage.removeItem("gskitLoggedIn");
+
+    document.getElementById("userArea").style.display="none";
+
+    document.getElementById("loginBtn").style.display="inline-block";
+
+    document.getElementById("signupBtn").style.display="inline-block";
+
+    document.getElementById("logoutBtn").style.display="none";
+
+    document.getElementById("profileSection").style.display="none";
+
+}
+
+
+/* ================= UPDATE USER UI ================= */
+
+function updateUserUI(){
+
+    const loggedIn=
+        localStorage.getItem("gskitLoggedIn");
+
+    const user=
+        JSON.parse(localStorage.getItem("gskitUser"));
+
+
+    if(loggedIn==="true" && user){
+
+        document.getElementById("userArea").style.display="flex";
+
+        document.getElementById("loginBtn").style.display="none";
+
+        document.getElementById("signupBtn").style.display="none";
+
+        document.getElementById("logoutBtn").style.display="inline-block";
+
+
+        const firstLetter=
+            user.name.charAt(0).toUpperCase();
+
+
+        document.getElementById("navAvatar").innerText=
+            firstLetter;
+
+        document.getElementById("navUserName").innerText=
+            "Hi, "+user.name;
+
+
+        document.getElementById("bigAvatar").innerText=
+            firstLetter;
+
+        document.getElementById("profileName").innerText=
+            user.name;
+
+        document.getElementById("profileFullName").innerText=
+            user.name;
+
+        document.getElementById("profileMobile").innerText=
+            user.mobile;
+
+        document.getElementById("profileDOB").innerText=
+            user.dob || "-";
+
+
+        document.getElementById("profileSection").style.display="block";
+
+    }
+
+}
+
+
+/* =====================================================
+                SCIENTIFIC CALCULATOR
+===================================================== */
+
+let calcExpression="";
+
+
+function openScientificCalculator(){
+
+    document
+    .getElementById("scientificModal")
+    .style.display="flex";
+
+
+    clearCalculator();
+
+}
+
+
+function closeScientificCalculator(){
+
+    document
+    .getElementById("scientificModal")
+    .style.display="none";
+
+}
+
+
+function updateCalculator(){
+
+    document
+    .getElementById("calcExpression")
+    .innerText=
+        calcExpression;
+
+}
+
+
+function addNumber(number){
+
+    calcExpression += number;
+
+    updateCalculator();
+
+}
+
+
+function addDecimal(){
+
+    calcExpression += ".";
+
+    updateCalculator();
+
+}
+
+
+function addOperator(operator){
+
+    if(calcExpression===""){
+        return;
+    }
+
+
+    const last=
+        calcExpression.charAt(
+            calcExpression.length-1
+        );
+
+
+    if(
+        last==="+" ||
+        last==="-" ||
+        last==="*" ||
+        last==="/"
+    ){
+
+        calcExpression=
+            calcExpression.slice(0,-1);
+
+    }
+
+
+    calcExpression += operator;
+
+    updateCalculator();
+
+}
+
+
+function addConstant(type){
+
+    if(type==="pi"){
+
+        calcExpression += Math.PI.toString();
+
+    }
+
+    if(type==="e"){
+
+        calcExpression += Math.E.toString();
+
+    }
+
+
+    updateCalculator();
+
+}
+
+
+function clearCalculator(){
+
+    calcExpression="";
+
+    document.getElementById("calcExpression").innerText="";
+
+    document.getElementById("calcResult").innerText="0";
+
+}
+
+
+function deleteLast(){
+
+    calcExpression=
+        calcExpression.slice(0,-1);
+
+    updateCalculator();
+
+}
+
+
+function calculateResult(){
+
+    if(calcExpression===""){
+        return;
+    }
+
+
+    try{
+
+        let expression=
+            calcExpression;
+
+
+        /*
+          Only basic mathematical characters
+          are allowed.
+        */
+
+        if(!/^[0-9+\-*/().\s]+$/.test(expression)){
+
+            throw new Error("Invalid");
+
+        }
+
+
+        let result=
+            Function(
+                '"use strict"; return ('+
+                expression+
+                ')'
+            )();
+
+
+        if(!Number.isFinite(result)){
+
+            throw new Error("Invalid");
+
+        }
+
+
+        result=
+            Number(
+                result.toFixed(10)
+            );
+
+
+        document
+        .getElementById("calcResult")
+        .innerText=result;
+
+
+    }
+    catch(error){
+
+        document
+        .getElementById("calcResult")
+        .innerText="Error";
+
+    }
+
+}
+
+
+/* ================= SCIENTIFIC FUNCTIONS ================= */
+
+function calculateFunction(type){
+
+    if(calcExpression===""){
+        return;
+    }
+
+
+    try{
+
+        let value;
+
+
+        /*
+          First calculate current expression
+        */
+
+        if(
+            /^[0-9+\-*/().\s]+$/.test(calcExpression)
+        ){
+
+            value=
+                Function(
+                    '"use strict"; return ('+
+                    calcExpression+
+                    ')'
+                )();
+
+        }
+        else{
+
+            throw new Error("Invalid");
+
+        }
+
+
+        let result;
+
+
+        switch(type){
+
+            case "sqrt":
+
+                result=
+                    Math.sqrt(value);
+
+                break;
+
+
+            case "square":
+
+                result=
+                    Math.pow(value,2);
+
+                break;
+
+
+            case "sin":
+
+                result=
+                    Math.sin(
+                        value*Math.PI/180
+                    );
+
+                break;
+
+
+            case "cos":
+
+                result=
+                    Math.cos(
+                        value*Math.PI/180
+                    );
+
+                break;
+
+
+            case "tan":
+
+                result=
+                    Math.tan(
+                        value*Math.PI/180
+                    );
+
+                break;
+
+
+            case "log":
+
+                result=
+                    Math.log10(value);
+
+                break;
+
+
+            case "ln":
+
+                result=
+                    Math.log(value);
+
+                break;
+
+
+            case "inverse":
+
+                result=
+                    1/value;
+
+                break;
+
+
+            case "percent":
+
+                result=
+                    value/100;
+
+                break;
+
+
+            case "factorial":
+
+                result=
+                    factorial(value);
+
+                break;
+
+
+            default:
+
+                result=value;
+
+        }
+
+
+        if(!Number.isFinite(result)){
+
+            throw new Error("Invalid");
+
+        }
+
+
+        result=
+            Number(
+                result.toFixed(10)
+            );
+
+
+        document
+        .getElementById("calcResult")
+        .innerText=result;
+
+
+        calcExpression=
+            result.toString();
+
+
+        updateCalculator();
+
+
+    }
+    catch(error){
+
+        document
+        .getElementById("calcResult")
+        .innerText="Error";
+
+    }
+
+}
+
+
+/* ================= FACTORIAL ================= */
+
+function factorial(number){
+
+    if(number<0){
+
+        throw new Error("Invalid");
+
+    }
+
+
+    if(!Number.isInteger(number)){
+
+        throw new Error("Invalid");
+
+    }
+
+
+    if(number>170){
+
+        throw new Error("Too Large");
+
+    }
+
+
+    let result=1;
+
+
+    for(let i=2;i<=number;i++){
+
+        result*=i;
+
+    }
+
+
+    return result;
+
+}
+
+
+/* ================= CLICK OUTSIDE MODAL ================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const loginModal=
+            document.getElementById("loginModal");
+
+        const signupModal=
+            document.getElementById("signupModal");
+
+        const scientificModal=
+            document.getElementById("scientificModal");
+
+
+        if(event.target===loginModal){
+
+            closeLogin();
+
+        }
+
+
+        if(event.target===signupModal){
+
+            closeSignup();
+
+        }
+
+
+        if(event.target===scientificModal){
+
+            closeScientificCalculator();
+
+        }
+
+    }
+);
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+
+            closeLogin();
+
+            closeSignup();
+
+            closeScientificCalculator();
+
+        }
+
+    }
+);
+
+
+/* ================= LOAD USER ================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateUserUI();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+
+फोटो कुठे ठेवायचा?
+
+तुझ्या GitHub repository मध्ये files साधारण असे ठेव:
+
+GSKit/
+│
+├── index.html
+│
+└── scientific-calculator.jpg
