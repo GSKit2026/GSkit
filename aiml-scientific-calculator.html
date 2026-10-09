@@ -2,242 +2,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GSKit Scientific Calculator</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;min-height:100vh;display:flex;align-items:center;
- justify-content:center;padding:15px;background:#18242d;
- font-family:Arial,sans-serif;color:white
-}
-.calculator{
- width:100%;max-width:390px;padding:18px;
- background:#34343d;border-radius:25px;
- box-shadow:0 12px 30px #0008
-}
-.brand{font-size:23px;font-weight:bold;margin-bottom:12px}
-.brand small{display:block;font-size:11px;color:#ddd;margin-top:4px}
-.screen{
- background:#dce6d9;color:#17221a;padding:12px;
- border:6px solid #191a1f;border-radius:10px;
- text-align:right;min-height:100px;margin-bottom:15px;
- overflow-wrap:anywhere
-}
-#mode{font-size:11px}
-#expression{font-size:20px;min-height:28px;margin-top:5px}
-#answer{font-size:25px;font-weight:bold;min-height:30px}
-.keys{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
-button{
- min-width:0;min-height:47px;border:0;border-radius:8px;
- background:#45454f;color:white;font-size:15px;font-weight:bold;
- box-shadow:0 3px 0 #19191e;cursor:pointer
-}
-button:active{transform:translateY(2px)}
-.fn{color:#f2dc73}
-.num{background:#90919a;font-size:20px}
-.op{background:#62626c;font-size:20px}
-.eq,.clear{background:#c6e65b;color:#1b2410}
-@media(max-width:350px){.calculator{padding:11px}.keys{gap:5px}button{min-height:42px;font-size:13px}}
+body{margin:0;padding:16px 8px;background:#172027;display:flex;justify-content:center;font-family:Arial,sans-serif;color:white}
+.calc{width:100%;max-width:410px;padding:17px;background:linear-gradient(130deg,#484850,#25252c);border:2px solid #55555d;border-radius:28px;box-shadow:0 15px 35px #0009}
+.top{display:flex;justify-content:space-between;align-items:center;margin:0 5px 13px}
+.brand{font-size:25px;font-weight:900;letter-spacing:1px}
+.model{font-size:12px;font-weight:bold;line-height:1.5;margin-top:3px}
+.edition{font-size:10px;color:#ddd}
+.screen{height:112px;border:7px solid #17181c;border-radius:12px;background:#dce5d9;color:#1d271d;padding:9px;text-align:right;overflow:hidden;margin-bottom:13px;box-shadow:inset 0 2px 6px #0004}
+#mode{font-size:11px;min-height:15px}
+#expr{font-size:20px;min-height:30px;overflow-wrap:anywhere}
+#out{font-size:25px;font-weight:bold;overflow-wrap:anywhere}
+.controls{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:9px}
+.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+button{position:relative;min-width:0;height:47px;border:0;border-radius:8px;background:linear-gradient(#45454e,#292930);color:white;font-weight:bold;font-size:14px;box-shadow:0 3px 0 #151519;cursor:pointer;touch-action:manipulation}
+button:active{transform:translateY(2px);box-shadow:0 1px 0 #151519}
+.num{height:53px;background:linear-gradient(#a2a3ab,#777983);font-size:21px}
+.op{font-size:21px;background:linear-gradient(#696973,#44444d)}
+.fn{color:#f0dc78;font-size:12px}
+.pink{color:#f18cb6}
+.blue{color:#8bdce5}
+.green{background:linear-gradient(#d4eb71,#a9c747);color:#1e270e;font-size:16px}
+.sub{position:absolute;top:-10px;left:2px;font-size:9px;color:#f1dc72;white-space:nowrap}
+.fnrow{display:flex;justify-content:space-between;margin:0 6px 7px;font-size:11px;color:#f1dc72}
+.foot{text-align:center;font-size:10px;color:#ccc;margin:14px 0 0}
+@media(max-width:350px){.calc{padding:11px}.keys,.controls{gap:5px}button{height:42px;font-size:12px}.num{height:47px;font-size:19px}.sub{font-size:8px}}
 </style>
 </head>
 <body>
-<main class="calculator">
- <div class="brand">CASIO
-  <small>fx-991ES PLUS STYLE • GSKit</small>
+<main class="calc">
+ <header class="top">
+  <div>
+   <div class="brand">CASIO</div>
+   <div class="model">fx-991ES PLUS<br>NATURAL-V.P.A.M.</div>
+  </div>
+  <div class="edition">2nd edition</div>
+ </header>
+
+ <section class="screen">
+  <div id="mode">DEG ◢ COMP</div>
+  <div id="expr">0</div>
+  <div id="out">0</div>
+ </section>
+
+ <div class="fnrow"><span>SHIFT</span><span class="pink">ALPHA</span><span>MODE SETUP</span><span>ON</span></div>
+ <div class="controls">
+  <button class="fn" onclick="shiftMode()">SHIFT</button>
+  <button class="fn pink" onclick="alphaMode()">ALPHA</button>
+  <button class="fn" onclick="insert('(')">◀</button>
+  <button class="fn" onclick="toggleAngle()">DRG</button>
+  <button class="green" onclick="clearAll()">ON/AC</button>
  </div>
- <div class="screen">
-  <div id="mode">DEG • COMP</div>
-  <div id="expression">0</div>
-  <div id="answer">0</div>
- </div>
+
+ <div class="fnrow"><span>SOLVE =</span><span>d/dx</span><span>∫</span><span>CALC</span></div>
  <div class="keys">
-  <button class="fn" onclick="angleMode=angleMode==='DEG'?'RAD':'DEG';updateMode()">DEG/RAD</button>
-  <button class="fn" onclick="put('sin(')">sin</button>
-  <button class="fn" onclick="put('cos(')">cos</button>
-  <button class="fn" onclick="put('tan(')">tan</button>
-  <button class="fn" onclick="put('log(')">log</button>
+  <button class="fn" onclick="insert('(')">CALC</button>
+  <button class="fn" onclick="insert('sqrt(')">√</button>
+  <button class="fn" onclick="insert('^2')">x²</button>
+  <button class="fn" onclick="insert('^')">xⁿ</button>
+  <button class="fn" onclick="insert('log(')">log□</button>
 
-  <button class="fn" onclick="put('asin(')">sin⁻¹</button>
-  <button class="fn" onclick="put('acos(')">cos⁻¹</button>
-  <button class="fn" onclick="put('atan(')">tan⁻¹</button>
-  <button class="fn" onclick="put('ln(')">ln</button>
-  <button class="fn" onclick="put('sqrt(')">√</button>
+  <button class="fn" onclick="insert('^(-1)')">x⁻¹</button>
+  <button class="fn" onclick="insert('log(')">log</button>
+  <button class="fn" onclick="insert('ln(')">ln</button>
+  <button class="fn" onclick="insert('!')">x!</button>
+  <button class="fn" onclick="insert('abs(')">Abs</button>
 
-  <button class="fn" onclick="put('(')">(</button>
-  <button class="fn" onclick="put(')')">)</button>
-  <button class="fn" onclick="put('^')">xʸ</button>
-  <button class="fn" onclick="put('^2')">x²</button>
-  <button class="fn" onclick="put('!')">x!</button>
+  <button class="fn" onclick="insert('-')">(-)</button>
+  <button class="fn" onclick="insert('sin(')">sin</button>
+  <button class="fn" onclick="insert('cos(')">cos</button>
+  <button class="fn" onclick="insert('tan(')">tan</button>
+  <button class="fn" onclick="insert('%')">%</button>
 
-  <button class="num" onclick="put('7')">7</button>
-  <button class="num" onclick="put('8')">8</button>
-  <button class="num" onclick="put('9')">9</button>
-  <button class="op" onclick="put('/')">÷</button>
-  <button class="clear" onclick="del()">DEL</button>
+  <button class="fn" onclick="memoryRecall()">RCL</button>
+  <button class="fn" onclick="insert('(')">ENG</button>
+  <button class="fn" onclick="insert('(')">(</button>
+  <button class="fn" onclick="insert(')')">)</button>
+  <button class="fn" onclick="memoryAdd()">M+</button>
 
-  <button class="num" onclick="put('4')">4</button>
-  <button class="num" onclick="put('5')">5</button>
-  <button class="num" onclick="put('6')">6</button>
-  <button class="op" onclick="put('*')">×</button>
-  <button class="op" onclick="put('-')">−</button>
+  <button class="num" onclick="insert('7')"><span class="sub">CONST</span>7</button>
+  <button class="num" onclick="insert('8')"><span class="sub">CONV</span>8</button>
+  <button class="num" onclick="insert('9')">9</button>
+  <button class="green" onclick="backspace()">DEL</button>
+  <button class="green" onclick="clearAll()">AC</button>
 
-  <button class="num" onclick="put('1')">1</button>
-  <button class="num" onclick="put('2')">2</button>
-  <button class="num" onclick="put('3')">3</button>
-  <button class="op" onclick="put('+')">+</button>
-  <button class="eq" onclick="calculate()">=</button>
+  <button class="num" onclick="insert('4')"><span class="sub">MATRIX</span>4</button>
+  <button class="num" onclick="insert('5')"><span class="sub">VECTOR</span>5</button>
+  <button class="num" onclick="insert('6')">6</button>
+  <button class="op" onclick="insert('*')">×</button>
+  <button class="op" onclick="insert('/')">÷</button>
 
-  <button class="num" onclick="put('0')">0</button>
-  <button class="num" onclick="put('.')">.</button>
-  <button class="fn" onclick="put('pi')">π</button>
-  <button class="fn" onclick="put('e')">e</button>
-  <button class="clear" onclick="clearAll()">AC</button>
+  <button class="num" onclick="insert('1')"><span class="sub">STAT</span>1</button>
+  <button class="num" onclick="insert('2')"><span class="sub">CMPLX</span>2</button>
+  <button class="num" onclick="insert('3')"><span class="sub">BASE</span>3</button>
+  <button class="op" onclick="insert('+')">+</button>
+  <button class="op" onclick="insert('-')">−</button>
 
-  <button class="fn" onclick="put('%')">%</button>
-  <button class="fn" onclick="put('Ans')">Ans</button>
-  <button class="fn" onclick="put('abs(')">Abs</button>
-  <button class="fn" onclick="put('^(-1)')">x⁻¹</button>
-  <button class="fn" onclick="put('*10^')">×10ˣ</button>
+  <button class="num" onclick="insert('0')">0</button>
+  <button class="num" onclick="insert('.')">.</button>
+  <button class="op" onclick="insert('*10^')">×10ˣ</button>
+  <button class="fn" onclick="insert('Ans')">Ans</button>
+  <button class="green" onclick="calculate()">=</button>
  </div>
+ <p class="foot">GSKit • Scientific Calculator</p>
 </main>
 
 <script>
 "use strict";
 let expression="";
 let lastAnswer=0;
-let angleMode="DEG";
+let memory=0;
+let angle="DEG";
+let shifted=false;
+let alpha=false;
 
-const expEl=document.getElementById("expression");
-const ansEl=document.getElementById("answer");
-
-function updateMode(){
- document.getElementById("mode").textContent=angleMode+" • COMP";
-}
 function render(){
- expEl.textContent=expression||"0";
+ document.getElementById("expr").textContent=expression||"0";
+ document.getElementById("mode").textContent=angle+" ◢ COMP"+(shifted?" • SHIFT":"")+(alpha?" • ALPHA":"");
 }
-function put(value){
- if(expression==="Error") expression="";
- if(value==="Ans") value="("+String(lastAnswer)+")";
- expression+=value;
+function insert(v){
+ if(expression==="Error")expression="";
+ if(v==="Ans")v="("+lastAnswer+")";
+ expression+=v;
  render();
 }
 function clearAll(){
  expression="";
- ansEl.textContent="0";
+ document.getElementById("out").textContent="0";
  render();
 }
-function del(){
- if(expression==="Error") expression="";
+function backspace(){
+ if(expression==="Error")expression="";
  else expression=expression.slice(0,-1);
  render();
 }
+function toggleAngle(){
+ angle=angle==="DEG"?"RAD":"DEG";
+ render();
+}
+function shiftMode(){shifted=!shifted;alpha=false;render();}
+function alphaMode(){alpha=!alpha;shifted=false;render();}
+function memoryRecall(){insert("("+memory+")");}
+function memoryAdd(){
+ try{memory+=evaluate(expression||String(lastAnswer));document.getElementById("out").textContent="M="+memory;}
+ catch(e){document.getElementById("out").textContent="Error";}
+}
 function factorial(n){
- if(!Number.isInteger(n)||n<0||n>170) throw Error("factorial");
- let r=1;
- for(let i=2;i<=n;i++) r*=i;
- return r;
+ if(!Number.isInteger(n)||n<0||n>170)throw Error();
+ let r=1;for(let i=2;i<=n;i++)r*=i;return r;
+}
+function evaluate(source){
+ let s=source.replace(/\s/g,"").replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-");
+ const tokens=s.match(/(?:\d+(?:\.\d*)?|\.\d+|[A-Za-z]+|[()+\-*/^%!])/g);
+ if(!tokens||tokens.join("")!==s)throw Error();
+ let p=0;
+ const rad=x=>angle==="DEG"?x*Math.PI/180:x;
+ const deg=x=>angle==="DEG"?x*180/Math.PI:x;
+ const funcs={
+  sin:x=>Math.sin(rad(x)),cos:x=>Math.cos(rad(x)),tan:x=>Math.tan(rad(x)),
+  asin:x=>deg(Math.asin(x)),acos:x=>deg(Math.acos(x)),atan:x=>deg(Math.atan(x)),
+  log:x=>Math.log10(x),ln:x=>Math.log(x),sqrt:x=>Math.sqrt(x),abs:x=>Math.abs(x),
+  fact:factorial
+ };
+ const constants={pi:Math.PI,e:Math.E,Ans:lastAnswer};
+ function eat(t){if(tokens[p]===t){p++;return true;}return false;}
+ function primary(){
+  if(eat("+"))return primary();
+  if(eat("-"))return -primary();
+  if(eat("(")){let v=add();if(!eat(")"))throw Error();return v;}
+  let t=tokens[p],v;
+  if(t===undefined)throw Error();
+  if(/^(?:\d|\.)/.test(t)){p++;v=Number(t);}
+  else if(/^[A-Za-z]+$/.test(t)){
+   p++;
+   if(eat("(")){
+    if(!Object.prototype.hasOwnProperty.call(funcs,t))throw Error();
+    let a=add();if(!eat(")"))throw Error();v=funcs[t](a);
+   }else{
+    if(!Object.prototype.hasOwnProperty.call(constants,t))throw Error();
+    v=constants[t];
+   }
+  }else throw Error();
+  while(true){
+   if(eat("!"))v=factorial(v);
+   else if(eat("%"))v/=100;
+   else break;
+  }
+  return v;
+ }
+ function power(){let v=primary();if(eat("^"))v=Math.pow(v,power());return v;}
+ function mul(){let v=power();while(true){if(eat("*"))v*=power();else if(eat("/"))v/=power();else break;}return v;}
+ function add(){let v=mul();while(true){if(eat("+"))v+=mul();else if(eat("-"))v-=mul();else break;}return v;}
+ let result=add();
+ if(p!==tokens.length||!Number.isFinite(result))throw Error();
+ return result;
 }
 function calculate(){
  try{
-  let s=expression.replace(/\s/g,"");
-  if(!s) throw Error("empty");
-
-  s=s.replace(/π/g,"pi");
-  s=s.replace(/×/g,"*").replace(/÷/g,"/");
-  s=s.replace(/−/g,"-");
-
-  // Convert factorial postfix to a parser function.
-  s=s.replace(/(\d+(?:\.\d+)?|\([^()]*\))!/g,"fact($1)");
-  s=s.replace(/(\d+(?:\.\d+)?)%/g,"($1/100)");
-
-  const tokens=s.match(/(?:\d+(?:\.\d*)?|\.\d+|[A-Za-z]+|[()+\-*/^,])/g);
-  if(!tokens||tokens.join("")!==s) throw Error("syntax");
-
-  let p=0;
-  const rad=x=>angleMode==="DEG"?x*Math.PI/180:x;
-  const deg=x=>angleMode==="DEG"?x*180/Math.PI:x;
-  const funcs={
-   sin:x=>Math.sin(rad(x)),
-   cos:x=>Math.cos(rad(x)),
-   tan:x=>Math.tan(rad(x)),
-   asin:x=>deg(Math.asin(x)),
-   acos:x=>deg(Math.acos(x)),
-   atan:x=>deg(Math.atan(x)),
-   log:x=>Math.log10(x),
-   ln:x=>Math.log(x),
-   sqrt:x=>Math.sqrt(x),
-   abs:x=>Math.abs(x),
-   fact:factorial
-  };
-  const constants={pi:Math.PI,e:Math.E,Ans:lastAnswer};
-
-  function eat(t){
-   if(tokens[p]===t){p++;return true}
-   return false;
-  }
-  function primary(){
-   if(eat("+"))return primary();
-   if(eat("-"))return -primary();
-   if(eat("(")){
-    let v=addSub();
-    if(!eat(")"))throw Error("bracket");
-    return v;
-   }
-   const t=tokens[p];
-   if(t===undefined)throw Error("value");
-   if(/^(?:\d|\.)/.test(t)){
-    p++;return Number(t);
-   }
-   if(/^[A-Za-z]+$/.test(t)){
-    p++;
-    if(eat("(")){
-     if(!Object.prototype.hasOwnProperty.call(funcs,t))throw Error("function");
-     const v=addSub();
-     if(!eat(")"))throw Error("bracket");
-     return funcs[t](v);
-    }
-    if(Object.prototype.hasOwnProperty.call(constants,t))return constants[t];
-    throw Error("constant");
-   }
-   throw Error("syntax");
-  }
-  function power(){
-   let v=primary();
-   if(eat("^"))v=Math.pow(v,power());
-   return v;
-  }
-  function mulDiv(){
-   let v=power();
-   while(true){
-    if(eat("*"))v*=power();
-    else if(eat("/"))v/=power();
-    else break;
-   }
-   return v;
-  }
-  function addSub(){
-   let v=mulDiv();
-   while(true){
-    if(eat("+"))v+=mulDiv();
-    else if(eat("-"))v-=mulDiv();
-    else break;
-   }
-   return v;
-  }
-
-  const result=addSub();
-  if(p!==tokens.length||!Number.isFinite(result))throw Error("result");
+  let result=evaluate(expression);
   lastAnswer=result;
-  ansEl.textContent=Number(result.toPrecision(12)).toString();
-  expression=String(result);
-  render();
- }catch(error){
-  ansEl.textContent="Error";
+  let out=Number(result.toPrecision(12)).toString();
+  document.getElementById("out").textContent=out;
+  expression=out;
+  shifted=false;alpha=false;render();
+ }catch(e){
+  document.getElementById("out").textContent="Math Error";
  }
 }
-updateMode();
 render();
 </script>
 </body>
